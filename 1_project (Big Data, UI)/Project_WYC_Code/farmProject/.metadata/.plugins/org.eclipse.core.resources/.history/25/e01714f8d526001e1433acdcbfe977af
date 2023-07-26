@@ -1,0 +1,40 @@
+package com.farmWYC.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmDao;
+import com.farmWYC.dto.FarmAreaCropDto;
+
+public class FarmAreaCropListCommand implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		FarmDao dao = new FarmDao();
+		
+		String areaName = (String) request.getAttribute("areaCrop");
+		System.out.println("areaName" + areaName);
+		
+		ArrayList<FarmAreaCropDto> areaCrops = dao.getAreaCrop(areaName);
+		
+		System.out.println("areaCrops.size" + areaCrops.size());
+		ArrayList<String> areaCropList = new ArrayList<String>();
+		
+		for(int i=0; i>areaCrops.size(); i++) {
+			String crop_eng = areaCrops.get(i).getArea_eng();
+			String crop_name = areaCrops.get(i).getArea_name();
+			
+			System.out.println(crop_eng);
+			System.out.println(crop_name);
+			areaCropList.add(crop_eng);
+			areaCropList.add(crop_name);
+		}
+		System.out.println("areaName : " + areaCrops.get(0).getCrop_name());
+		System.out.println("areaName : " + areaCrops.get(0).getCrop_eng());
+		System.out.println(areaCropList);
+		request.setAttribute("areaCropList", areaCropList);
+	}
+
+}

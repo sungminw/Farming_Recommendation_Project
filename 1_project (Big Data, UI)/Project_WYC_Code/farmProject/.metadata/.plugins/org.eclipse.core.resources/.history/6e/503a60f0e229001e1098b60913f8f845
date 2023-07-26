@@ -1,0 +1,17 @@
+package com.farmWYC.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FarmPolicyListCommand implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		String selectCrop = request.getParameter("selectCrop");
+		String selectArea = request.getParameter("selectArea");
+		String selectAge = request.getParameter("selectAge");
+		String selectPeriod = request.getParameter("selectPeriod");
+		
+	}
+
+}

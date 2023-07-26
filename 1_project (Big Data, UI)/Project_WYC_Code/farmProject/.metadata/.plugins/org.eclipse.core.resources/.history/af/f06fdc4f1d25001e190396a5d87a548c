@@ -1,0 +1,32 @@
+package com.farmWYC.dto;
+
+public class FarmCropAreaDto {
+	int crop_num;
+	String crop_name;
+	String crop_eng;
+	String crop_area1;
+	String crop_area2;
+	String crop_area3;
+	String crop_area4;
+	String crop_area5;
+	String crop_area6;
+	String crop_area7;
+	String crop_area8;
+	
+	public FarmCropAreaDto() {
+	}
+	
+	public FarmCropAreaDto(int crop_num, String crop_name, String crop_eng, String crop_area1, String crop_area2, String crop_area3, String crop_area4, String crop_area5, String crop_area6, String crop_area7, String crop_area8) {
+		this.crop_num = crop_num;
+		this.crop_name = crop_name;
+		this.crop_eng = crop_eng;
+		this.crop_area1 = crop_area1;
+		this.crop_area1 = crop_area2;
+		this.crop_area1 = crop_area3;
+		this.crop_area1 = crop_area4;
+		this.crop_area1 = crop_area5;
+		this.crop_area1 = crop_area6;
+		this.crop_area1 = crop_area7;
+		this.crop_area1 = crop_area8;
+	}
+}

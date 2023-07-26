@@ -1,0 +1,39 @@
+package com.farmWYC.command;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmDao;
+import com.farmWYC.dto.FarmCropAreaDto;
+
+public class FarmCropAreaCommand implements FarmCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+//		System.out.println("FarmCropAreaCommand 연결 성공");
+		
+		String crop = (String) request.getAttribute("crop");
+		System.out.println("FarmCropArea Service : "+crop);
+		
+		FarmDao dao = new FarmDao();
+		ArrayList<FarmCropAreaDto> dtos = dao.cropAreaList(crop);
+//		System.out.println("command : "+ dtos);
+//		System.out.println("dtos.get(0) " + dtos.get(0));
+//		System.out.println("getCrop_area " + dtos.get(0).getCrop_area());
+//		System.out.println("getCrop_eng " + dtos.get(0).getCrop_eng());
+//		System.out.println("getCrop_name " + dtos.get(0).getCrop_name());
+		request.setAttribute("cropAreaList", dtos);
+		 response.setContentType("text/planin; charset=utf-8");
+		 try {
+			response.getWriter().println("test11111");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		response.getWriter().println(cropAreaList);
+	}	
+
+}

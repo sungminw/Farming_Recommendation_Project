@@ -1,0 +1,5 @@
+package com.farmWYC.dto;
+
+public class FarmPolicyListDto {
+
+}

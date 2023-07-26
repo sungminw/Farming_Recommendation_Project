@@ -1,0 +1,456 @@
+package com.farmWYC.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+import javax.swing.JList.DropLocation;
+
+import com.farmWYC.dto.FarmAreaCropDto;
+import com.farmWYC.dto.FarmCropAreaDto;
+import com.farmWYC.dto.FarmCropDto;
+import com.farmWYC.dto.FarmCropInfoDto;
+import com.farmWYC.dto.FarmCropProfileDto;
+import com.farmWYC.dto.FarmCropProfitDto;
+
+public class FarmDao {
+	DataSource dataSource;
+	
+	public FarmDao() {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle11g");
+			System.out.println("DataSource 가져옴");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+//	작물 리스트 가져오기
+	public ArrayList<FarmCropDto> cropList() {
+		System.out.println("cropList() 실행");
+		
+		ArrayList<FarmCropDto> dtos = new ArrayList<FarmCropDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "SELECT * FROM cropList ORDER BY crop_name";
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				int crop_num = resultSet.getInt("crop_num");
+				String crop_name = resultSet.getString("crop_name");
+				String crop_eng = resultSet.getString("crop_eng");
+				
+				FarmCropDto dto = new FarmCropDto(crop_num, crop_name, crop_eng);
+				dtos.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("cropList() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+
+	
+//	지역 리스트 가져오기 
+	public ArrayList<FarmCropAreaDto> cropAreaList(String crop) {
+		System.out.println("cropAreaList() 실행");
+		
+		ArrayList<FarmCropAreaDto> dtos = new ArrayList<FarmCropAreaDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "SELECT * FROM area_Crops WHERE crop_eng=? ORDER BY area_name";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("crop : " + crop);
+			preparedStatement.setString(1, crop);
+
+			resultSet = preparedStatement.executeQuery();
+			
+			
+			while(resultSet.next()) {
+				String area_eng = resultSet.getString("area_eng");
+				String area_name = resultSet.getString("area_name");
+//				String crop_area = resultSet.getString("crop_area");
+				
+				FarmCropAreaDto dto = new FarmCropAreaDto(area_eng, area_name);
+				System.out.println("dto : " + dto);
+				System.out.println(dto.getArea_eng());
+				System.out.println(dto.getArea_name());
+//				System.out.println(dto.getCrop_area());
+				dtos.add(dto);
+				
+			}
+		} catch (Exception e) {
+			System.out.println("cropAreaList() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	
+	public ArrayList<FarmCropInfoDto> getCropInfo(String selectCrop) {
+		System.out.println("getCropInfo() 실행");
+		
+		ArrayList<FarmCropInfoDto> dtos = new ArrayList<FarmCropInfoDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			
+			String query = "SELECT * FROM " +selectCrop+ "_matrix WHERE year=2021";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("crop : " + selectCrop);
+//			preparedStatement.setString(1, selectCrop);
+
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				int pcost = resultSet.getInt("pcost");
+				int dcost = resultSet.getInt("dcost");
+				int temp = resultSet.getInt("temp");
+				int rain = resultSet.getInt("rain");
+				int sun = resultSet.getInt("sun");
+				int insolation = resultSet.getInt("insolation");
+				int hprice = resultSet.getInt("hprice");
+				int gdp = resultSet.getInt("gdp");
+				int area = resultSet.getInt("area");
+				int yield = resultSet.getInt("yield");
+				
+				FarmCropInfoDto dto = new FarmCropInfoDto(pcost, dcost, temp, rain, sun, insolation, hprice, gdp, area, yield);
+				dtos.add(dto);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("getCropInfo() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	
+	public ArrayList<FarmCropProfitDto> getCropProfit(String selectCrop) {
+		System.out.println("getCropProfit() 실행");
+		
+		ArrayList<FarmCropProfitDto> dtos = new ArrayList<FarmCropProfitDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			
+			String query = "SELECT * FROM cropPrediction_matrix WHERE crop=?";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("crop : " + selectCrop);
+			preparedStatement.setString(1, selectCrop);
+
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {	
+				int interept = resultSet.getInt("interept");
+				int pcost = resultSet.getInt("pcost");
+				int dcost = resultSet.getInt("dcost");
+				int temp = resultSet.getInt("temp");
+				int rain = resultSet.getInt("rain");
+				int sun = resultSet.getInt("sun");
+				int insolation = resultSet.getInt("insolation");
+				int hprice = resultSet.getInt("hprice");
+				int gdp = resultSet.getInt("gdp");
+				int area = resultSet.getInt("area");
+				int yield = resultSet.getInt("yield");
+				
+				FarmCropProfitDto dto = new FarmCropProfitDto(interept, pcost, dcost, temp, rain, sun, insolation, hprice, gdp, area, yield);
+				dtos.add(dto);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("getCropProfit() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	
+	public ArrayList<Integer> getRevenues(String selectCrop){
+		System.out.println("getRevenues() 실행");
+		
+		ArrayList<Integer> dtos = new ArrayList<Integer>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "SELECT revenue FROM "+selectCrop+"_matrix ORDER BY year";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("getRevenues crop : " + selectCrop);
+
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {	
+				int revenue = resultSet.getInt("revenue");
+				
+				dtos.add(revenue);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("getRevenues() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	
+	public void historySave(String wycId, String selectCrop, String selectCropKor,String selectArea, int salesResult){
+		System.out.println("historySave() 실행");
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "INSERT INTO salesHistory VALUES (history_seq.nextval,?,?,?,?,?)";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, wycId);
+			preparedStatement.setString(2, selectCrop);
+			preparedStatement.setString(3, selectArea);
+			preparedStatement.setString(4, selectCropKor);
+			preparedStatement.setInt(5, salesResult);
+			int rn = preparedStatement.executeUpdate();
+				
+		} catch (Exception e) {
+			System.out.println("historySave() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	
+	//여기부터 하기
+	public ArrayList<FarmAreaCropDto> getAreaCrop(String areaName){
+		System.out.println("getAreaCrop() 실행");
+		
+		ArrayList<FarmAreaCropDto> dtos = new ArrayList<FarmAreaCropDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "SELECT * FROM area_crops WHERE area_eng=?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, areaName);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String area_name = resultSet.getString("area_name");
+				String crop_name = resultSet.getString("crop_name");
+				String crop_eng = resultSet.getString("crop_eng");
+				
+				FarmAreaCropDto dto = new FarmAreaCropDto(area_name, crop_name, crop_eng);
+				System.out.println("getAreaCrop() : " + dto.getCrop_eng());
+				dtos.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("getAreaCrop() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	
+	public FarmCropProfileDto getCropProfile(String selectCrop){
+		System.out.println("getCropProfile() 실행");
+		
+		FarmCropProfileDto dto = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			System.out.println("SQL : " + selectCrop);
+			
+			String query = "SELECT * FROM crop_profile WHERE cropName=?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, selectCrop);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String cropName = resultSet.getString("cropName");
+				String cropKor = resultSet.getString("cropKor");
+				String cropVariety = resultSet.getString("cropVariety");
+				String cropGrow = resultSet.getString("cropGrow");
+				String cropSpecial = resultSet.getString("cropSpecial");
+				
+				dto = new FarmCropProfileDto(cropName, cropKor, cropVariety, cropGrow, cropSpecial);
+			}
+		} catch (Exception e) {
+			System.out.println("getCropProfile() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
+	
+	
+	public ArrayList<String> getHpriceYield(String selectCrop){
+		System.out.println("getHpriceYield() 실행");
+		
+		ArrayList<String> dto = new ArrayList<String>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			System.out.println("SQL : " + selectCrop);
+			
+			String query = "SELECT year, hPrice, yield FROM "+selectCrop+"_matrix WHERE year IN (2017, 2018, 2019, 2020, 2021)";
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String year = resultSet.getString("year");
+				String hPrice = resultSet.getString("hPrice");
+				String yield = resultSet.getString("yield");
+				
+				dto.add(year);
+				dto.add(hPrice);
+				dto.add(yield);
+			}
+		} catch (Exception e) {
+			System.out.println("getHpriceYield() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
+	
+	
+	
+}
+
+
+//ResultSetMetaData md = resultSet.getMetaData();
+//int column = md.getColumnCount();
+//System.out.println(column);
+
+//// Json 형태로 변환
+//JSONArray array = new JSONArray();	// [], JSON 배열 생성 
+//while(resultSet.next()) {
+//	JSONObject obj = new JSONObject();	// {}, JSON 객체 생성
+//    obj.put("bidx", resultSet.getInt("BIDX"));	// obj.put("key","value")
+//    obj.put("crop_name", resultSet.getString("crop_name"));
+//    obj.put("crop_eng", resultSet.getString("crop_eng"));
+//    obj.put("crop_area", resultSet.getString("crop_area"));
+//    array.add(obj);	//작성한 JSON 객체를 배열에 추가
+//}
+
+//System.out.print(array.toJSONString());

@@ -1,0 +1,24 @@
+package com.farmWYC.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmDao;
+
+public class FarmCropHpriceYieldCommand implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		String selectCrop = (String) request.getAttribute("selectCrop");
+		System.out.println("FarmCropHpriceYieldCommand : "+ selectCrop);
+		
+		FarmDao dao = new FarmDao();
+		ArrayList<String> cropHpriceYieldArrayList = dao.getHpriceYield(selectCrop);
+		System.out.println(cropHpriceYieldArrayList);
+		
+		request.setAttribute("cropHpriceYieldArrayList", cropHpriceYieldArrayList);
+	}
+
+}

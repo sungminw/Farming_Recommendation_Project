@@ -1,0 +1,17 @@
+/* #chartContainer { */
+/*     width: 100%;    or any other percentage or pixel value */
+/*     height: 100%; or any other pixel value */
+/*     margin: 0 auto; center the container */
+/* } */
+
+/* #chartContainer_yield { */
+/*     width: 50%;    or any other percentage or pixel value */
+/*     height: 100%; or any other pixel value */
+/*     margin: 0 auto; center the container */
+/* } */
+
+/* #chartContainer_price{ */
+/*     width: 50%;    or any other percentage or pixel value */
+/*     height: 100%; or any other pixel value */
+/*     margin: 0 auto; center the container */
+/* } */

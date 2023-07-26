@@ -1,0 +1,5 @@
+package com.farmWYC.command;
+
+public interface FarmCommand {
+	void execute(HttpServletRequest request, HttpServletResponse response);
+}

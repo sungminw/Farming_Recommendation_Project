@@ -1,0 +1,22 @@
+package com.farmWYC.dao;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class FarmCostDao {
+	DataSource dataSource;
+	
+	public FarmCostDao() {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle11g");
+			System.out.println("DataSource 가져옴");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public 
+}

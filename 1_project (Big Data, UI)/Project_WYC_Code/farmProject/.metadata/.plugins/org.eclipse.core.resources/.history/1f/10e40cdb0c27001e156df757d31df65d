@@ -1,0 +1,8 @@
+package com.farmWYC.dto;
+
+public class FarmCropProfileDto {
+	private String cropName;
+	private String 
+	private String 
+	private String 
+}

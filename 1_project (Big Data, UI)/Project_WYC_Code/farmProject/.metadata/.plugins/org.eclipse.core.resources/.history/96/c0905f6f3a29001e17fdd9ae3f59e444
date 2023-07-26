@@ -1,0 +1,713 @@
+main * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.wyc-background {
+  margin-bottom: 150px;
+}
+/* .wyc-image{
+    border: 1px solid black;
+} */
+/* .revenue2{
+    border:1px solid black;
+    border-radius: 10px;
+} */
+.wyc-map {
+  position: relative;
+  height: 20vh;
+  margin-bottom: 150px;
+}
+.wyc-area {
+  /* width: 50px; */
+  height: 80vh;
+  /* overflow-x: scroll; */
+}
+
+.wyc-area > div {
+  /* height: 80vh; */
+  /* height: 700px; */
+}
+.row-revenue {
+  position: relative;
+}
+/* 지도 */
+.wyc-map img {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+/*지도 버튼 위치*/
+.wyc-boseong {
+  top: 52%;
+  left: 77px;
+}
+.wyc-damyang {
+  top: 36%;
+  left: 35px;
+}
+.wyc-gangjin {
+  top: 60%;
+  left: 50%;
+}
+.wyc-goheung {
+  top: 60%;
+  left: 120px;
+}
+.wyc-gokseong {
+  top: 38%;
+  left: 100px;
+}
+.wyc-gurye {
+  top: 36%;
+  left: 160px;
+}
+.wyc-gwangyang {
+  top: 44%;
+  left: 190px;
+}
+.wyc-haenam {
+  top: 63%;
+  left: -55px;
+}
+.wyc-hampyeng {
+  top: 42%;
+  left: -60px;
+}
+.wyc-hwasun {
+  top: 44%;
+  left: 50px;
+}
+.wyc-jangheung {
+  top: 56%;
+  left: 30px;
+}
+.wyc-jangseung {
+  top: 32%;
+  left: 0px;
+}
+.wyc-jindo {
+  top: 65%;
+  left: -120px;
+}
+.wyc-mokpo {
+  top: 50%;
+  left: -105px;
+}
+.wyc-muan {
+  top: 47%;
+  left: -80px;
+}
+.wyc-naju {
+  top: 46%;
+  left: -10px;
+}
+.wyc-sinan {
+  top: 54%;
+  left: -140px;
+}
+.wyc-suncheon {
+  top: 45%;
+  left: 120px;
+}
+.wyc-wando {
+  top: 70%;
+  left: -10px;
+}
+.wyc-yeongam {
+  top: 52%;
+  left: -30px;
+}
+.wyc-yeonggwang {
+  top: 35%;
+  left: -70px;
+}
+.wyc-yeosu {
+  top: 54%;
+  left: 170px;
+}
+/*지도버튼 호버*/
+.wyc-boseong:hover {
+  content: url("../img/boseong_hover.png");
+  top: 52%;
+  left: 77px;
+}
+.wyc-damyang:hover {
+  content: url("../img/damyang_hover.png");
+}
+.wyc-gangjin:hover {
+  content: url("../img/gangjin_hover.png");
+}
+.wyc-goheung:hover {
+  content: url("../img/goheung_hover.png");
+}
+.wyc-gokseong:hover {
+  content: url("../img/gokseong_hover.png");
+}
+.wyc-gurye:hover {
+  content: url("../img/gurye_hover.png");
+}
+.wyc-gwangyang:hover {
+  content: url("../img/gwangyang_hover.png");
+}
+.wyc-haenam:hover {
+  content: url("../img/haenam_hover.png");
+}
+.wyc-hampyeng:hover {
+  content: url("../img/hampyeong_hover.png");
+}
+.wyc-hwasun:hover {
+  content: url("../img/hawsun_hover.png");
+}
+.wyc-jangheung:hover {
+  content: url("../img/jangheung_hover.png");
+}
+.wyc-jangseung:hover {
+  content: url("../img/jangseong_hover.png");
+}
+.wyc-jindo:hover {
+  content: url("../img/jindo_hover.png");
+}
+.wyc-mokpo:hover {
+  content: url("../img/mokpo_hover.png");
+}
+.wyc-muan:hover {
+  content: url("../img/muan_hover.png");
+}
+.wyc-naju:hover {
+  content: url("../img/naju_hover.png");
+}
+.wyc-sinan:hover {
+  content: url("../img/sinan_hover.png");
+}
+.wyc-suncheon:hover {
+  content: url("../img/suncheon_hover.png");
+}
+.wyc-wando:hover {
+  content: url("../img/wando_hover.png");
+}
+.wyc-yeongam:hover {
+  content: url("../img/yeongam_hover.png");
+}
+.wyc-yeonggwang:hover {
+  content: url("../img/yeonggwang_hover.png");
+}
+.wyc-yeosu:hover {
+  content: url("../img/yeosu_hover.png");
+}
+
+.wyc-area {
+  top: 90%;
+}
+
+/* .wyc-area{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 120%;
+    left: 50%;
+} */
+@media screen and (min-height: 837px) {
+  .wyc-area {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 90%;
+    left: 50%;
+  }
+}
+@media screen and (min-height: 538px) and (max-height: 836px) {
+  .wyc-area {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 110%;
+    left: 50%;
+  }
+}
+@media screen and (min-height: 425px) and (max-height: 537px) {
+  .wyc-area {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 130%;
+    left: 50%;
+  }
+}
+@media screen and (max-height: 424px) {
+  .wyc-area {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 180%;
+    left: 50%;
+  }
+}
+.wyc-area > div {
+  position: absolute;
+}
+.wyc-area > div > img {
+  width: 70px;
+  height: 35px;
+}
+.wyc-area > div:hover {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 35px;
+}
+.wyc-select-crop {
+  display: none;
+  /* height: 100vh; */
+  height: 400px;
+  /* margin-bottom: 100px; */
+}
+.wyc-select-crop-title {
+  text-align: center;
+}
+.wyc-table {
+  position: relative;
+  text-align: center;
+  height: 100%;
+  width: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.wyc-table > div {
+  position: relative;
+  border: 0.5px solid rgb(91, 91, 91);
+  /* border-radius: 15px; */
+  height: 50px;
+  margin-bottom: 3%;
+  /* transition: all 0.2s linear; */
+}
+/* .wyc-table > div:hover{
+    max-height: 6.1%;
+    transform: scale(2);
+    overflow: hidden;
+} */
+.wyc-table > div > div {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.6);
+}
+/*사진*/
+.wyc-table img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wyc-table p {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  color: black;
+  font-size: 1.5rem;
+}
+.rice {
+  overflow: hidden;
+  position: relative;
+  margin-top: 5%;
+  /* text-align: center; */
+}
+.chives {
+  overflow: hidden;
+}
+.cucumber {
+  overflow: hidden;
+}
+.garlic {
+  overflow: hidden;
+}
+.grape {
+  overflow: hidden;
+}
+.greenonion {
+  overflow: hidden;
+}
+.kiwi {
+  overflow: hidden;
+}
+.peach {
+  overflow: hidden;
+}
+.pepper {
+  overflow: hidden;
+}
+.spinach {
+  overflow: hidden;
+}
+.onion {
+  overflow: hidden;
+}
+.stberry {
+  overflow: hidden;
+}
+.spotato {
+  overflow: hidden;
+}
+.tomato {
+  overflow: hidden;
+}
+
+.wyc-info-crop {
+  /* height: 100vh; */
+  /* border: 3px solid black; */
+  border-radius: 15px;
+  display: none;
+  background-color: #fff;
+  margin-bottom: 150px;
+  padding: 30px;
+}
+.wyc-info-crop h3 {
+  margin-top: 30px;
+  text-align: center;
+  margin-bottim:10px;
+}
+
+.crop-info-up {
+  width: 100%;
+  /* height: 40%; */
+/*   height: 400px; */
+  min-height: 200px;
+  margin-top:20px;
+/*   border-bottom: 1px dotted rgb(167, 167, 167); */
+}
+/* .crop-info-up > div { */
+/*   display: none; */
+/* } */
+/* .crop-info-up ul { */
+/*   position: relative; */
+/*   left: 20%; */
+/*   width: 75%; */
+/* } */
+/* .crop-info-up li { */
+/*   margin-top: 3%; */
+/* } */
+/* .crop-info-up img { */
+/*   width: 35%; */
+/*   max-width: 300px; */
+/*   height: 35%; */
+/*   max-height: 300px; */
+/*   margin-left: 10%; */
+/*   margin-right: -10%; */
+/*   float: left; */
+/* } */
+.crop-info-down {
+  width: 100%;
+  height: 300px;
+  /* height: 60%; */
+  /* margin-bottom: 100px; */
+}
+.crop-info-down > div {
+/*   display: none; */
+}
+
+/* @media (max-width: 425px) { */
+/*   .wyc-info-crop { */
+/*     height: 50vh; */
+/*   } */
+/*   .crop-info-up { */
+/*     height: 0px; */
+/*   } */
+/* } */
+
+.f1,
+.f2 {
+  position: absolute;
+}
+.f1 {
+  left: 0;
+}
+.f2 {
+  right: 0;
+}
+
+.wyc-revenue-header {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+.wyc-image {
+  width: 100vw;
+  height: 250px;
+  background: url(../img/non.jpg) center 0 / 1200px repeat-x;
+  animation: movebg 40s linear infinite;
+}
+@keyframes movebg {
+  0% {
+    background-position: 0 center;
+  }
+  100% {
+    background-position: -300px center;
+  }
+}
+.wyc-image-text {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  color: white;
+  font-size: 3rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+.sec1 {
+  margin-top: 50px;
+}
+.sec2,
+.sec3 {
+  display: none;
+}
+
+/*fix 바*/
+#total_cost {
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* height: 90px;/ */
+  background-color: rgb(226, 245, 226);
+  /* display: flex; */
+  /* justify-content: space-between;s */
+  align-items: center;
+  padding-top: 20px;
+  margin-top: 80px;
+  border: none;
+  padding: 20px 200px;
+  /* position: relative; */
+}
+
+@media (max-width: 1200px) {
+  #total_cost {
+    padding: 20px 0px;
+  }
+}
+
+#total_cost div {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  /* padding: 10px; */
+  /* background-color: rgb(226, 245, 226); */
+  /* margin: auto; */
+
+  /* --bs-gutter-x: none; */
+}
+
+.total_cost_inner {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 주의 */
+.row {
+  --bs-gutter-x: none;
+}
+
+.total_cost_submit2 {
+  border: none;
+  border-radius: 15px;
+  padding: 8px 15px;
+  margin: 0 auto;
+  font-size: 1.7rem;
+  background-color: #5b8c51a6;
+  font-weight: bold;
+  color: white;
+  border: 5px solid #91ac8ca6;
+}
+.total_cost_submit2:hover {
+  color: #5b8c51a6;
+  font-weight: bold;
+  background-color: #e2f5e2;
+  border: 5px solid #91ac8ca6;
+}
+
+@media (max-width: 767px) {
+  #total_cost div {
+    font-size: 1rem;
+  }
+  /* #total_cost {
+    height: 300px;
+  } */
+}
+.wyc-submit {
+  display: none;
+}
+
+#modal-container2.modal-hidden2 {
+/*   display: none; */
+}
+#modal-container2 {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+#revenue-modal2 {
+  position: fixed;
+  background-color: #ffffff;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 15px;
+  width: 500px;
+  height: 400px;
+  overflow-x: auto;
+}
+#revenue-modal2 > div {
+  display: none;
+}
+#revenue-modal2 canvas {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+#close-modal2 {
+  position: absolute;
+  content: url(../img/xImg.jpg);
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  right: 5px;
+}
+#close-modal2:hover {
+  content: url(../img/xImg_hover.jpg);
+}
+#submit-modal {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  /* top: 100%; */
+  left: 50%;
+  border-radius: 15px;
+  padding: 5px 20px;
+  bottom: 3%;
+  background-color: rgb(226, 245, 226);
+  border-style: none;
+  font-weight: bold;
+}
+
+#submit-modal:hover {
+  background-color: #5b8c51a6;
+  color: #fff;
+}
+
+/* 수정 07.12 */
+.no_gutter {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* .cost_title { */
+/*   position: fixed; */
+/*   display: none; */
+/*   top: 33%; */
+/*   z-index: 100; */
+/*   left: 42%; */
+/* } */
+.cost_title {
+  visibility: visible;
+}
+
+.cost_sigungu,
+.cost_crop,
+.cost_total {
+  color: blue;
+}
+
+
+.select_list_title {
+  margin-top: 150px;
+}
+
+.wyc-area {
+  /* width: 100px;
+  height: 373px; */
+  /* overflow-x: scroll; */
+}
+
+
+/* ------------- */
+.modal-content {
+  top: 150px;
+  height: auto;
+  align-content: center;
+  width: 100%;
+}
+.modal-title {
+  margin: 0 auto;
+}
+
+@media (max-width: 320px) {
+	.crop-info-down{
+/* 		margin-top:500px; */
+		height: 0px;
+	}
+	.wyc-btn-box{
+/* 		margin-top:350px */
+	}
+}
+
+.bg_custom{
+	background-color: #DEE8DC !important;
+/* 	text-aligin:center; */
+	display:flex;
+	justify-content: center;
+}
+
+.card_title{
+	color:black;
+	font-weight: bold;
+/* 	margin:0 auto; */
+}
+
+.profile_ul li{
+	margin-bottom: 5px;
+}
+
+.card_custom{
+/* 	margin-left: 10px !important; */
+/* 	width: 100% !important; */
+	padding: 0 !important;
+}
+
+.gutter_0{
+	--bs-gutter-x: 0 !important;
+}
+
+.inner_content{
+	justify-content: center;
+}
+
+/* .profile_ul{ */
+/* 	display: flex; */
+/*   flex-direction: column; 리스트 아이템들을 수직으로 정렬 */
+/*   align-content: space-around; */
+/* } */
+
+
+/* .card_crop_list { */
+/*   display: flex; */
+/*   justify-content: center; 수평 중앙 정렬 */
+/*   align-items: center; 수직 중앙 정렬 */
+/*   height: 100vh; 뷰포트 높이의 100% 사용 (전체 화면 높이로 설정) */
+/* } */
+
+.profile_ul {
+/*   list-style: none; */
+/*   padding: 0; */
+  display: flex;
+  flex-direction: column; /* 리스트 아이템들을 수직으로 정렬 */
+  align-items: inherit;
+}
+

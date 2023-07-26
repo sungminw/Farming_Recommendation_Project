@@ -1,0 +1,72 @@
+package com.farmWYC.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import com.farmWYC.dto.FarmCropDto;
+import com.farmWYC.dto.FarmPolicyListDto;
+
+public class FarmCostDao {
+	DataSource dataSource;
+	
+	public FarmCostDao() {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle11g");
+			System.out.println("DataSource 가져옴");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public ArrayList<FarmPolicyListDto> getPolictList(String selectArea, int selectAge, String selectPeriod){
+		System.out.println("getPolictList() 실행");
+		
+		ArrayList<FarmPolicyListDto> dtos = new ArrayList<FarmPolicyListDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "SELECT policy_name, cost FROM policyEx WHERE age_up<? AND ?<age_down AND period < ? AND area_eng=?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, selectAge);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				int crop_num = resultSet.getInt("crop_num");
+				String crop_name = resultSet.getString("crop_name");
+				String crop_eng = resultSet.getString("crop_eng");
+				
+				FarmCropDto dto = new FarmCropDto(crop_num, crop_name, crop_eng);
+				dtos.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("getPolictList() 예외 발생");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		
+		
+		return null;
+		
+	}
+}

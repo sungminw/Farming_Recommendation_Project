@@ -1,0 +1,24 @@
+package com.farmWYC.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmDao;
+
+public class FarmSalesInsertCommand implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		FarmDao dao = new FarmDao();
+		
+		String id = request.getParameter("id");
+		String selectCrop = request.getParameter("selectCrop");
+		String selectArea = request.getParameter("selectArea");
+		String salesResult = request.getParameter("isalesResultd");
+		
+		dao.historySave(id, selectCrop, selectArea, salesResult);
+		
+		
+	}
+
+}

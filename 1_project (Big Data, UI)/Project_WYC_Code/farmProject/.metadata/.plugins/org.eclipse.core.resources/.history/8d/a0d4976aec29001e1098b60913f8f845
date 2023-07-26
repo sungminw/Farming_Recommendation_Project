@@ -1,0 +1,33 @@
+package com.farmWYC.dao;
+
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import com.farmWYC.dto.FarmPolicyListDto;
+
+public class FarmCostDao {
+	DataSource dataSource;
+	
+	public FarmCostDao() {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle11g");
+			System.out.println("DataSource 가져옴");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public ArrayList<FarmPolicyListDto> getPolictList(String selectArea, String selectAge, String selectPeriod){
+		
+		
+		
+		
+		return null;
+		
+	}
+}

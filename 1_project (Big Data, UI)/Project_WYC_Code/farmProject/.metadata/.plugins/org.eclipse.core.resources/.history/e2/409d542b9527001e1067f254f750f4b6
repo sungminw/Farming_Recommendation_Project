@@ -1,0 +1,645 @@
+const cropSelect = document.querySelector(".wyc-select-crop");
+const cropInfo = document.querySelector(".wyc-info-crop");
+const cropMap = document.querySelector(".wyc-map");
+//지역버튼
+const boseong = document.querySelector(".wyc-boseong");
+const damyang = document.querySelector(".wyc-damyang");
+const gangjin = document.querySelector(".wyc-gangjin");
+const goheung = document.querySelector(".wyc-goheung");
+const gokseong = document.querySelector(".wyc-gokseong");
+const gurye = document.querySelector(".wyc-gurye");
+const gwangyang = document.querySelector(".wyc-gwangyang");
+const haenam = document.querySelector(".wyc-haenam");
+const hampyeng = document.querySelector(".wyc-hampyeng");
+const hwasun = document.querySelector(".wyc-hwasun");
+const jangheung = document.querySelector(".wyc-jangheung");
+const jangseung = document.querySelector(".wyc-jangseung");
+const jindo = document.querySelector(".wyc-jindo");
+const mokpo = document.querySelector(".wyc-mokpo");
+const muan = document.querySelector(".wyc-muan");
+const naju = document.querySelector(".wyc-naju");
+const sinan = document.querySelector(".wyc-sinan");
+const suncheon = document.querySelector(".wyc-suncheon");
+const wando = document.querySelector(".wyc-wando");
+const yeongam = document.querySelector(".wyc-yeongam");
+const yeonggwang = document.querySelector(".wyc-yeonggwang");
+const yeosu = document.querySelector(".wyc-yeosu");
+const areas = [
+  boseong,
+  damyang,
+  gangjin,
+  goheung,
+  gokseong,
+  gurye,
+  gwangyang,
+  haenam,
+  hampyeng,
+  hwasun,
+  jangheung,
+  jangseung,
+  jindo,
+  mokpo,
+  muan,
+  naju,
+  sinan,
+  suncheon,
+  wando,
+  yeongam,
+  yeonggwang,
+  yeosu,
+];
+//농작물 이름
+const chives = document.querySelector(".chives");
+const cucumber = document.querySelector(".cucumber");
+const garlic = document.querySelector(".garlic");
+const greenonion = document.querySelector(".greenonion");
+const grape = document.querySelector(".grape");
+const kiwi = document.querySelector(".kiwi");
+const onion = document.querySelector(".onion");
+const peach = document.querySelector(".peach");
+const pepper = document.querySelector(".pepper");
+const rice = document.querySelector(".rice");
+const spinach = document.querySelector(".spinach");
+const stberry = document.querySelector(".stberry");
+const spotato = document.querySelector(".spotato");
+const tomato = document.querySelector(".tomato");
+const crops = [
+  chives,
+  cucumber,
+  garlic,
+  grape,
+  greenonion,
+  kiwi,
+  onion,
+  peach,
+  pepper,
+  rice,
+  spinach,
+  stberry,
+  spotato,
+  tomato,
+];
+
+//농작물 화이트보드 이름
+const whiteBoardChives = document.querySelector(".white-board-chives");
+const whiteBoardCucumber = document.querySelector(".white-board-cucumber");
+const whiteBoardGarlic = document.querySelector(".white-board-garlic");
+const whiteBoardGrape = document.querySelector(".white-board-grape");
+const whiteBoardGreenonion = document.querySelector(".white-board-greenonion");
+const whiteBoardKiwi = document.querySelector(".white-board-kiwi");
+const whiteBoardPeach = document.querySelector(".white-board-peach");
+const whiteBoardPepper = document.querySelector(".white-board-pepper");
+const whiteBoardOnion = document.querySelector(".white-board-onion");
+const whiteBoardRice = document.querySelector(".white-board-rice");
+const whiteBoardSpinach = document.querySelector(".white-board-spinach");
+const whiteBoardStberry = document.querySelector(".white-board-stberry");
+const whiteBoardSpotato = document.querySelector(".white-board-spotato");
+const whiteBoardTomato = document.querySelector(".white-board-tomato");
+const whiteBoards = [
+  whiteBoardChives,
+  whiteBoardCucumber,
+  whiteBoardGarlic,
+  whiteBoardGrape,
+  whiteBoardGreenonion,
+  whiteBoardKiwi,
+  whiteBoardOnion,
+  whiteBoardPeach,
+  whiteBoardPepper,
+  whiteBoardRice,
+  whiteBoardSpinach,
+  whiteBoardSpotato,
+  whiteBoardStberry,
+  whiteBoardTomato,
+];
+
+//농작물 이름표시
+const chivesText = document.querySelector(".chives-text");
+const cucumberText = document.querySelector(".cucumber-text");
+const garlicText = document.querySelector(".garlic-text");
+const grapeText = document.querySelector(".grape-text");
+const greenonionText = document.querySelector(".greenonion-text");
+const kiwiText = document.querySelector(".kiwi-text");
+const onionText = document.querySelector(".onion-text");
+const peachText = document.querySelector(".peach-text");
+const pepperText = document.querySelector(".pepper-text");
+const riceText = document.querySelector(".rice-text");
+const spinachText = document.querySelector(".spinach-text");
+const stberryText = document.querySelector(".stberry-text");
+const spotatoText = document.querySelector(".spotato-text");
+const tomatoText = document.querySelector(".tomato-text");
+
+//info up-down창
+const info_up_chives = document.querySelector(".info-up-chives");
+const info_down_chives = document.querySelector(".info-down-chives");
+const info_up_cucumber = document.querySelector(".info-up-cucumber");
+const info_down_cucumber = document.querySelector(".info-down-cucumber");
+const info_up_garlic = document.querySelector(".info-up-garlic");
+const info_down_garlic = document.querySelector(".info-down-garlic");
+const info_up_grape = document.querySelector(".info-up-grape");
+const info_down_grape = document.querySelector(".info-down-grape");
+const info_up_greenonion = document.querySelector(".info-up-greenonion");
+const info_down_greenonion = document.querySelector(".info-down-greenonion");
+const info_up_kiwi = document.querySelector(".info-up-kiwi");
+const info_down_kiwi = document.querySelector(".info-down-kiwi");
+const info_up_onion = document.querySelector(".info-up-onion");
+const info_down_onion = document.querySelector(".info-down-onion");
+const info_up_peach = document.querySelector(".info-up-peach");
+const info_down_peach = document.querySelector(".info-down-peach");
+const info_up_pepper = document.querySelector(".info-up-pepper");
+const info_down_pepper = document.querySelector(".info-down-pepper");
+const info_up_rice = document.querySelector(".info-up-rice");
+const info_down_rice = document.querySelector(".info-down-rice");
+const info_up_spinach = document.querySelector(".info-up-spinach");
+const info_down_spinach = document.querySelector(".info-down-spinach");
+const info_up_stberry = document.querySelector(".info-up-stberry");
+const info_down_stberry = document.querySelector(".info-down-stberry");
+const info_up_spotato = document.querySelector(".info-up-spotato");
+const info_down_spotato = document.querySelector(".info-down-spotato");
+const info_up_tomato = document.querySelector(".info-up-tomato");
+const info_down_tomato = document.querySelector(".info-down-tomato");
+const infoUps = [
+  info_up_chives,
+  info_up_cucumber,
+  info_up_garlic,
+  info_up_grape,
+  info_up_greenonion,
+  info_up_kiwi,
+  info_up_onion,
+  info_up_peach,
+  info_up_pepper,
+  info_up_rice,
+  info_up_spinach,
+  info_up_stberry,
+  info_up_spotato,
+  info_up_tomato,
+];
+const infoDowns = [
+  info_down_chives,
+  info_down_cucumber,
+  info_down_garlic,
+  info_down_grape,
+  info_down_greenonion,
+  info_down_kiwi,
+  info_down_onion,
+  info_down_peach,
+  info_down_pepper,
+  info_down_rice,
+  info_down_spinach,
+  info_down_stberry,
+  info_down_spotato,
+  info_down_tomato,
+];
+
+//버튼
+const btnSubmit = document.querySelector(".wyc-submit");
+const btnReset = document.querySelector(".wyc-reset");
+const btnCloseModal = document.querySelector("#close-modal2");
+
+//모달컨테이너
+const modalBox = document.querySelector("#modal-container2.modal-hidden2");
+
+//모달수익그래프 칸
+const modalChives = document.querySelector(".modal-chives");
+const modalCucumber = document.querySelector(".modal-cucumber");
+const modalGarlic = document.querySelector(".modal-garlic");
+const modalGrape = document.querySelector(".modal-grape");
+const modalGreenonion = document.querySelector(".modal-greenonion");
+const modalKiwi = document.querySelector(".modal-kiwi");
+const modalOnion = document.querySelector(".modal-onion");
+const modalPeach = document.querySelector(".modal-peach");
+const modalPepper = document.querySelector(".modal-pepper");
+const modalRice = document.querySelector(".modal-rice");
+const modalSpinach = document.querySelector(".modal-spinach");
+const modalStberry = document.querySelector(".modal-stberry");
+const modalSpotato = document.querySelector(".modal-spotato");
+const modalTomato = document.querySelector(".modal-tomato");
+
+const modals = [
+  modalChives,
+  modalCucumber,
+  modalGarlic,
+  modalGrape,
+  modalGreenonion,
+  modalKiwi,
+  modalOnion,
+  modalPeach,
+  modalPepper,
+  modalRice,
+  modalSpinach,
+  modalStberry,
+  modalSpotato,
+  modalTomato,
+];
+
+//머리말?
+const sec2 = document.querySelector(".sec2");
+const sec3 = document.querySelector(".sec3");
+
+
+let areaKor = null;
+
+//지역버튼 클릭시 재배 가능 작물 리스트 제공
+const wyc_area_button = document.querySelectorAll(".wyc_area_button");
+
+for (let crop of wyc_area_button) {
+  crop.addEventListener("click", () => {
+	  let selectArea = crop.classList[0].substring(4);
+	  console.log(selectArea);
+	  
+		// 서버에 비동기 요청 보내기 (AJAX) 비용 받아오기
+	  $.ajax({
+	    type: "POST",
+	    url: "getAreaCropList.do", // 서버에서 데이터를 가져올 URL (받아올 데이터에 맞게 변경)
+	    data: { areaCrop : selectArea,},
+//	    dataType: "json",
+	    success: function(response) {
+	    	alert("salesText 연결 성공")
+	    	let revenueArr = response.substring(response.indexOf('[')+1, response.indexOf(']')).split(',');
+
+	    	console.log("revenueArr : " + revenueArr);
+	    	
+	    	const wyc_table = document.querySelector(".wyc-table");
+	    	
+	    	areaKor = revenueArr[0].trim();
+	    	
+            let str = "";
+            for(let i=1; i<revenueArr.length; i=i+2){
+            	str += "<div class='" +revenueArr[i].trim()+ " crop_list'>"+
+            			"<img src='../img/" +revenueArr[i].trim()+ "-list.jpg'"+
+            				"alt='" +revenueArr[i+1].trim()+ "'"+
+            				"id='" +revenueArr[i].trim()+ "-img'/>"+
+            			"<div class='white-board-" +revenueArr[i].trim()+ " WBC'>"+
+            				"<p class='" +revenueArr[i].trim()+ "-text'>" +revenueArr[i+1].trim()+ "</p>"+
+            			"</div>"+
+            		"</div>";
+            }
+            	wyc_table.innerHTML = str;
+	    	
+	    	  cropSelect.style.display = "block";
+	    	  sec2.style.display = "block";
+	    	  window.scrollTo(0, 1000, { behavior: "smooth" });
+	    	
+	    	  //작물 리스트 이미지 오버/아웃시 이벤트
+	    	  cropOverOut();
+	    	  
+	    	  //작물 프로필 정보
+	    	  crop_list_select();
+
+	    },
+	    error: function() {
+	      console.log("서버 요청 실패");
+	    }
+	  });
+  });
+
+}
+
+let cropKor = null;
+let cropEng = null;
+let cropKor = null;
+
+//작물  상세정보 프로필/리스트 제공 메서드
+function crop_list_select() {
+	const crop_lists = document.querySelectorAll(".crop_list");
+//	const WBCS = document.querySelectorAll(".WBC");
+
+	for (let crop_list of crop_lists) {
+		crop_list.addEventListener("click", () => {
+			let selectCrop = crop_list.classList[0];
+			cropKor = divElement.querySelector("p").innerHTML;
+
+			  $.ajax({
+				    type: "POST",
+				    url: "getCropProfile.do",
+				    data: { selectCrop : selectCrop,},
+//				    dataType: "json",
+				    success: function(response) {
+				    	alert("getCropProfile 연결 성공")
+				    	console.log("response : " + response);
+				    	
+				    	let revenueArr = response.substring(response.indexOf('[')+1, response.indexOf(']')).split(',');
+
+				    	console.log("revenueArr : " + revenueArr);
+				    	cropEng = revenueArr[0].trim();
+				    	cropKor = revenueArr[1].trim();
+//				    	areaKor = 
+				    	const crop_info_up = document.querySelector(".crop-info-up")
+				    	
+			            let str = "";
+				    	
+			            str += "<h3>" +revenueArr[1].trim()+ " 세부 정보</h3>"+
+			            			"<div class='info-up-" +revenueArr[0].trim()+ "'>"+
+			            				"<img src='../img/circle_"+revenueArr[0].trim()+".png' alt='"+revenueArr[1]+"' />"+
+			            					"<ul>"+
+			                					"<li>이름: " +revenueArr[1].trim()+ "</li>"+
+			            						"<li>품종: " +revenueArr[2].trim()+ "</li>"+
+			                					"<li>수확시기: " +revenueArr[3].trim()+ "</li>"+
+			                					"<li>특징: " +revenueArr[4].trim()+ "</li>"+
+			            					"</ul>"+
+			            			"</div>"
+			            
+			            crop_info_up.innerHTML = str;
+			            
+			            
+			            cropProfileList();
+//			           	농작물 경매 단가 & 생산량 차트
+			            drawChartHpriceYield(selectCrop);
+			            
+				    },
+				    error: function() {
+				      console.log("서버 요청 실패");
+				    }
+				  });
+		  });
+	}
+}
+
+//작물 프로필/리스트 정보 스크롤 및 타이틀 등 제공
+function cropProfileList() {
+	for (let i = 0; i < crops.length; i++) {
+	    cropInfo.style.display = "block";
+	    btnSubmit.style.display = "block";
+	    sec3.style.display = "block";
+	    window.scrollTo(0, 1500, { behavior: "smooth" });
+	}
+}
+
+
+//작물이름 오버 & 아웃시
+function cropOverOut() {
+	  const crop_lists = document.querySelectorAll(".crop_list");
+	  const WBCS = document.querySelectorAll(".WBC");
+
+	  for (let i = 0; i < crop_lists.length; i++) {
+	    const crop_list = crop_lists[i];
+	    const WBC = WBCS[i]; // 해당 인덱스의 WBC 요소와 매칭
+
+	    WBC.addEventListener("mouseover", () => {
+	      WBC.style.display = "none";
+	    });
+
+	    crop_list.addEventListener("mouseover", () => {
+	      WBC.style.display = "none";
+	    });
+
+	    crop_list.addEventListener("mouseout", () => {
+	      WBC.style.display = "block";
+	    });
+	  }
+	}
+
+
+
+
+//농작물 경매 단가 & 생산량 차트
+function drawChartHpriceYield(selectCrop) {
+	console.log("selectAreaData : " + selectCrop)
+	
+				  $.ajax({
+				    type: "POST",
+				    url: "getCropHpriceYield.do",
+				    data: { selectCrop : selectCrop,},
+//				    dataType: "json",
+				    success: function(response) {
+				    	alert("getCropHpriceYield 연결 성공")
+				    	console.log("response : " + response);
+				    	let revenueArr = response.substring(response.indexOf('[')+1, response.indexOf(']')).split(',');
+				    	console.log("revenueArr : " + revenueArr);
+				    	
+				    	let year = [];
+				    	for(let i=0; i<revenueArr.length; i+=3){
+				    		year += revenueArr[i];
+				    	}
+				    	
+				    	console.log(year);
+				    	
+				    	drawChartHprice(selectCrop, year, revenueArr);
+				    	drawChartYield(selectCrop, year, revenueArr);
+
+				    },
+				    error: function() {
+				      console.log("getCropHpriceYield 서버 요청 실패");
+				    }
+				  });
+	}
+
+
+//농작물 경매단가 차트
+function drawChartHprice(selectCrop, year, revenueArr) {
+	let hPrice = [];
+	
+	for(let i=1; i<revenueArr.length; i+=3){
+		hPrice.push(parseInt(revenueArr[i], 10));
+	}
+	
+	let existingChart = Chart.getChart("chart_price");
+	if (existingChart) {
+		existingChart.destroy();
+	}
+	
+	
+	var hPrice_data = {
+			  labels: [2017, 2018, 2019, 2020, 2021],
+			  datasets: [
+			    {
+			      label: cropKor+" 경매 단가 추이",
+			      data: hPrice,
+			      fill: false,
+			      borderColor: "rgb(207, 142, 255)",
+			      tension: 0.3,
+			    },
+			  ],
+			};
+			var ctx = document.getElementById("chart_price").getContext("2d");
+			var myChart = new Chart(ctx, {
+			  type: "line",
+			  data: hPrice_data,
+			  options: {},
+			});	
+}
+
+
+//농작물 생산량 차트
+function drawChartYield(selectCrop, year, revenueArr) {
+	let hPrice = [];
+	
+	for(let i=2; i<revenueArr.length; i+=3){
+		hPrice.push(parseInt(revenueArr[i], 10));
+	}
+	
+	let existingChart = Chart.getChart("chart_yield");
+	if (existingChart) {
+		existingChart.destroy();
+	}
+	
+	
+	var hPrice_data = {
+			  labels: [2017, 2018, 2019, 2020, 2021],
+			  datasets: [
+			    {
+			      label: cropKor+" 생산량 추이",
+			      data: hPrice,
+			      fill: false,
+			      borderColor: "rgb(207, 142, 255)",
+			      tension: 0.3,
+			    },
+			  ],
+			};
+			var ctx = document.getElementById("chart_yield").getContext("2d");
+			var myChart = new Chart(ctx, {
+			  type: "line",
+			  data: hPrice_data,
+			  options: {},
+			});	
+}
+
+//버튼리셋
+btnReset.addEventListener("click", () => {
+  document.body.scrollTo = (0, 0, { behavior: "smooth" });
+  cropInfo.style.display = "none";
+  sec3.style.display = "none";
+  cropSelect.style.display = "none";
+  sec2.style.display = "none";
+  btnSubmit.style.display = "none";
+});
+
+
+//모달 저장
+const btnModalSubmit = document.querySelector("#submit-modal");
+
+//저장출력
+//btnSubmit.addEventListener("click", () => {
+//  alert("저장 되었습니다.");
+//});
+
+
+const total_sales_chart = document.querySelector("#total_sales_chart");
+const cost_crop = document.querySelector(".cost_crop");
+const cost_sigungu = document.querySelector(".cost_sigungu");
+const cost_total = document.querySelector(".cost_total");
+
+btnSubmit.addEventListener("click", () => {
+	alert("asdasdsad");
+	
+	//농작물 이름 ( 영어 )
+//	const selectCrops = document.querySelectorAll('input[name="flexRadioDefault"]');
+//	let checkedValueCrop = null;
+//
+//	selectCrops.forEach((selectCrop) => {
+//	  if (selectCrop.checked) {
+//	    checkedValueCrop = selectCrop.value;
+//	  }
+//	});
+//	
+//	const selectAreas = document.querySelectorAll('input[name="select_area_radio_name"]');
+//	let checkedValueArea = null;
+//
+//	selectAreas.forEach((selectArea) => {
+//	  if (selectArea.checked) {
+//	    checkedValueArea = selectArea.value;
+//	  }
+//	});
+//	
+//	
+//	if (checkedValueCrop == null || checkedValueArea == null) {
+//		alert("농작물과 지역 모두 선택 해주세요.");
+//		e.stopPropagation();
+//		e.preventDefault(); // 기본 동작 방지
+//		} else {
+//	
+		//모달 title에 농작물 이름 받아오기
+//		let checkedIndex = -1;
+//
+//		for (let i = 0; i < selectCrops.length; i++) {
+//		  if (selectCrops[i].checked) {
+//		    checkedIndex = i;
+//		    break; // 체크된 요소를 찾았으면 반복문 종료
+//		  }
+//		}
+//		const form_check_label = document.querySelectorAll(".form-check-label");
+		
+		// 서버에 비동기 요청 보내기 (AJAX) 비용 받아오기
+	console.log("cropEng" + cropEng);
+	console.log("areaKor" + areaKor);
+	  $.ajax({
+	    type: "POST",
+	    url: "salesText.do", // 서버에서 데이터를 가져올 URL (받아올 데이터에 맞게 변경)
+	    data: { selectCrop : cropEng,
+	    		selectArea : areaKor,},
+	    success: function(response) {
+	    	alert("salesText 연결 성공")
+	      // 서버 요청이 성공적으로 완료되었을 때 동작할 코드
+	      // response 변수에 서버로부터 받은 데이터가 들어있습니다.
+	      // 예시: 서버에서 받은 데이터로 그래프를 그리는 함수를 호출합니다.
+//	    	let revenueArr = response.substring(response.indexOf('[')+1, response.indexOf(']')).split(',');
+//	    	total_cost.innerHTML = revenueArr[-1];
+	    	
+	    	    // JSON 형식의 문자열을 JavaScript 객체 또는 배열로 변환
+	    	let revenueArr = JSON.parse(response);
+	    	// revenueArr은 이제 JavaScript 배열이므로 인덱스를 사용하여 값에 접근 가능
+	    	//모달 타이틀에 값 설정
+	    	
+	    	//revenu1의 form갑 salesResult 설정
+	    	const salesResult = revenueArr[revenueArr.length - 1];
+//	    	document.querySelector(".salesResult").value = salesResult;
+	    	cost_total.innerHTML = salesResult;
+//	    	
+//	    	cost_crop.innerHTML = form_check_label[checkedIndex].innerHTML;
+	    	cost_sigungu.innerHTML = areaKor;
+	    	
+	    	//수정중
+//	    	modalBox.style.display = "block";
+	    	
+	    	
+	    	
+
+	    	console.log(revenueArr);
+	    	
+	    	//차트 그리는 메소드
+	    	drawChart(revenueArr);
+	    },
+	    error: function() {
+	      console.log("서버 요청 실패");
+	    }
+	  });
+//	}
+});
+
+
+//차트 그리는 메소드
+function drawChart(data) {
+	  // 이 부분에서 받은 데이터(data)를 사용하여 그래프를 그리는 로직을 작성합니다.
+	  // 예시: Chart.js를 사용하여 그래프를 그리는 경우
+	  // Chart.js가 먼저 페이지에 로드되어 있어야 합니다.
+	
+	const divisionData = data.map((value) => value / 10000);
+	console.log("divisionData : " + divisionData)
+	console.log("data : " + data)
+	
+	let existingChart = Chart.getChart('mychart');
+	if (existingChart) {
+		existingChart.destroy();
+	}
+	
+	var chart_data = {
+			  labels: [
+			    2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+			    2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023,
+			  ],
+			  datasets: [
+			    {
+			      label: "매출 추이(10a, 만원)",
+			      data: divisionData,
+			      fill: false,
+			      borderColor: "rgb(207, 142, 255)",
+			      tension: 0.3,
+			    },
+			  ],
+			};
+			var ctx = document.getElementById("mychart").getContext("2d");
+			var myChart = new Chart(ctx, {
+			  type: "line",
+			  data: chart_data,
+			  options: {},
+			});	
+	}

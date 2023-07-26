@@ -1,0 +1,23 @@
+package com.farmWYC.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmDao;
+import com.farmWYC.dto.FarmCropAreaDto;
+
+public class FarmCropProfile implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		String crop = (String) request.getAttribute("crop");
+		System.out.println("FarmCropArea Service : "+crop);
+		
+		FarmDao dao = new FarmDao();
+		ArrayList<FarmCropAreaDto> dtos = dao.cropAreaList(crop);
+		
+	}
+
+}

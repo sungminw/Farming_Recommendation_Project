@@ -1,0 +1,19 @@
+package com.farmWYC.dto;
+
+public class FarmHistorySaveDto {
+	private int pNum;
+	private String wycId;
+	private String selectCrop;
+	private String selectCropKor;
+	private int salesResult;
+	
+	public FarmHistorySaveDto() {
+	}
+	
+	public FarmHistorySaveDto(String wycId, String selectCrop, String selectCropKor, String salesResult) {
+		this.wycId = wycId;
+		this.selectCrop = selectCrop;
+		this.selectCropKor = selectCropKor;
+		this.salesResult = salesResult;
+	}
+}

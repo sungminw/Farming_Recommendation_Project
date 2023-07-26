@@ -1,0 +1,26 @@
+package com.farmWYC.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmCostDao;
+//import com.farmWYC.dao.FarmDao;
+import com.farmWYC.dto.FarmPolicyListDto;
+
+public class FarmPolicyListCommand implements FarmCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		String selectCrop = (String) request.getAttribute("selectCrop");
+		int selectArea = (Integer) request.getAttribute("selectArea");
+		int selectAge = (Integer) request.getAttribute("selectAge");
+		int selectPeriod = (Integer) request.getAttribute("selectPeriod");
+		
+		FarmCostDao dao = new FarmCostDao();
+		ArrayList<FarmPolicyListDto> dtos =  dao.getPolicyList(selectArea, selectAge, selectPeriod);
+		
+	}
+
+}

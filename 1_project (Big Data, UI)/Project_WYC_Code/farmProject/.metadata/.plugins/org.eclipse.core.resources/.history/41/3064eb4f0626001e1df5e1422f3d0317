@@ -1,0 +1,15 @@
+package com.farmWYC.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FarmSalesText implements FarmCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		String crop = (String) request.getAttribute("crop");
+		System.out.println("FarmCropArea Service : "+crop);
+		
+	}
+
+}

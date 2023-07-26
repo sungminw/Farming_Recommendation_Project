@@ -1,0 +1,5 @@
+package com.farmWYC.command;
+
+public class FarmCropHpriceYieldCommand {
+
+}
