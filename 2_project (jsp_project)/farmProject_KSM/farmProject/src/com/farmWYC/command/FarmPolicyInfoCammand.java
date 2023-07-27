@@ -1,0 +1,25 @@
+package com.farmWYC.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.farmWYC.dao.FarmCostDao;
+
+public class FarmPolicyInfoCammand implements FarmCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("FarmPolicyInfoCammand 연결 성공");
+		FarmCostDao dao = new FarmCostDao();
+		
+		String selectPolicyName = (String)request.getAttribute("selectPolicyName");
+		System.out.println("FarmPolicyInfoCammand : " + selectPolicyName);
+		
+		ArrayList<String> selectPolicy = dao.getPolicyInfo(selectPolicyName);
+		System.out.println("selectPolicy : " + selectPolicy);
+		request.setAttribute("selectPolicy", selectPolicy);
+	}
+
+}

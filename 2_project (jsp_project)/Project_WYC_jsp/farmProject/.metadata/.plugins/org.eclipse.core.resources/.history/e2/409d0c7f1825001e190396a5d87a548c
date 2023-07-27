@@ -1,5 +1,0 @@
-package com.farmWYC.command;
-
-public class CropAreaCommand implements Co{
-
-}
