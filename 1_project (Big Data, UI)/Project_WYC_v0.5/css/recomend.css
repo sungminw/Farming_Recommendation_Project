@@ -1,0 +1,109 @@
+.recomend-condition {
+margin-left: 15%;
+margin-right: 15%;
+}
+
+.recomend-title {
+    color: rgb(93, 175, 93);
+    display: block;
+    font-size: 1.7em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+select{
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #57af57;
+
+    width: 20%;
+}
+
+.recomend-select-si-gun-gu,
+.recomend-select-si-gun-gu-jeonnam {
+    margin-left: 2%;
+}
+
+.link-btn,
+.select-btn{
+    outline: none;
+    border: none;
+    background-color: white;
+    margin-left: 15%;
+    width: 8%;
+    height: 50px;
+    border: 2px solid #57af57;
+    font-size: 1.5vw;
+}
+
+.link-btn:hover,
+.select-btn:hover{
+    outline: none;
+    border: none;
+    background-color: #57af57;
+    margin-left: 15%;
+    width: 8%;
+    height: 50px;
+    border: 2px solid #57af57;
+    font-size: 1.5vw;
+    color: white;
+}
+
+.recomend-area-result {
+    min-height: 35vw;
+}
+
+.recomend-view{
+    display: none;
+}
+.recomend-view > div{
+    width: 25%;
+    display: inline-block;
+}
+
+.display_none{
+    display: none;
+}
+.display_show{
+    display: "";
+}
+
+.link-btn:hover,
+.link-btn{
+    margin-top: 5%;
+    margin-left: 20%;
+}
+
+.text-carousel {
+    width: 75%;
+}
+.textBox {
+    display: flex;
+}
+#textBox {
+    display: none;
+}
+.textA, .textB, textC {
+    float: left;
+}
+.textA {
+    margin-top: 5%;
+    margin-left: 15%;
+    font-size: 1.2vw;
+    /* background-color: rgb(255, 182, 182);
+    color: white; */
+}
+.textB {
+    margin-top: 5%;
+    margin-left: 9%;
+    font-size: 1.2vw;
+}
+.textC {
+    margin-top: 5%;
+    margin-left: 8%;
+    font-size: 1.2vw;
+}

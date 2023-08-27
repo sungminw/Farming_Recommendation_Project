@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+#content{
+  text-align: center;
+  margin-top: 100px;
+  padding: 0;
+}
+
+.weolcome_box{
+  margin: 0 auto;
+}
+
+.welcome_id_box{
+  margin-bottom: 100px;
+}
+
+.welcome_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  text-align: left;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#login_button{
+  width: 200px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(147, 215, 147);
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+  margin: 0 auto;
+}
+
+#login_button a{
+  color: white;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#login_button:hover{
+  background-color: rgb(226, 245, 226);
+}
+
+
+
+.welcome_message{
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  width: 650px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 30px;
+}
+
+@media (max-width : 450px) {
+  .welcome_message{width: 300px;}
+  #login_button{margin: 0; width: 150px;}
+  .welcome_message{font-size: 1rem;}
+}
+
+

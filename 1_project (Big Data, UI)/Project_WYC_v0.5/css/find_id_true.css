@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.service_box a{
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  font-size: 2.5rem;
+}
+
+.service_box a:hover{
+  color: darkgreen;
+  text-decoration: none;
+}
+
+
+#content{
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 200px;
+  padding: 0;
+}
+
+.find_box{
+  margin: 0 auto;
+}
+
+.find_box input{
+  border: none;
+  outline: none;
+}
+
+.service_box{
+  margin: 0 auto;
+}
+
+.login_id_box{
+  margin-bottom: 100px;
+}
+
+.input_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1rem;
+  text-align: left;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#submit_button{
+  width: 200px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(147, 215, 147);
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-top: 10px;
+}
+
+#submit_button:hover{
+  background-color: rgb(226, 245, 226);
+}
+
+input::placeholder{
+  font-size: 0.7rem;
+  opacity: 50%;
+}
+
+.service_box{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.border_right{
+  border-right: 3px solid black;
+}
+
+.padding_10{
+  padding: 0 20px;
+}
+
+@media (max-width : 400px) {
+  .service_box a{font-size: 1.8rem;}
+  .input_box_design{width: 300px;}
+}
+
+.find_id_title{
+  margin: 0 auto;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.find_id a,
+.find_pw a{
+  font-size: 1.5rem;
+}
+

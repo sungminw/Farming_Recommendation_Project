@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>WYC - Turn to farming</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/header.css" rel="stylesheet" />
+    <!-- mine -->
+    <link rel="stylesheet" href="css/revenue2.css" />
+    <link href="css/chart2.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="spinner-border text-primary"
+        role="status"
+        style="width: 3rem; height: 3rem"
+      ></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav
+      class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5"
+    >
+      <a href="index.html" class="navbar-brand d-flex align-items-center">
+        <h1 class="m-0"><img src="img/logo.png" style="width: 16vw" /></h1>
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler me-0"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a href="index.html" class="nav-item nav-link active">Home</a>
+          <a href="recomend.html" class="nav-item nav-link">추천서비스</a>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >수익 분석</a
+            >
+            <div class="dropdown-menu bg-light m-0">
+              <a href="revenue1.html" class="dropdown-item"
+                >매출 확인(농작물우선)</a
+              >
+              <a href="revenue2.html" class="dropdown-item"
+                >매출 확인(지역우선)</a
+              >
+              <a href="serviceCost.html" class="dropdown-item">비용 조회</a>
+              <a href="serviceProfit.html" class="dropdown-item">수익 확인</a>
+            </div>
+          </div>
+          <a href="servicePolicyCheck.html" class="nav-item nav-link"
+            >지원정책</a
+          >
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >커뮤니티</a
+            >
+            <div class="dropdown-menu bg-light m-0">
+              <a href="serviceEsidence.html" class="dropdown-item"
+                >농지 & 거주지 현황</a
+              >
+              <a href="festival.html" class="dropdown-item"
+                >지역축제 & 문화행사</a
+              >
+              <a href="success.html" class="dropdown-item">귀농 성공사례</a>
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >회원관리</a
+            >
+            <div class="dropdown-menu bg-light m-0">
+              <a href="login.html" class="dropdown-item">로그인</a>
+              <a href="mypage.html" class="dropdown-item">마이 페이지</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!--Header Moving Picture Start-->
+    <div
+      class="container-fluid header_img py-5 mb-5 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container text-center py-5">
+        <h1 class="display-3 text-white mb-4 animated slideInDown">
+          매출확인(지역 우선)
+        </h1>
+      </div>
+    </div>
+    <!--Header Moving Picture End-->
+
+    <div class="container-fluid wyc-background no_gutter">
+      <div class="row revenue2">
+        <div
+          class="text-center mx-auto pb-4 wow fadeInUp sec1"
+          data-wow-delay="0.3s"
+          style="max-width: 500px"
+        >
+          <p class="section-title bg-white text-center text-primary px-3">
+            매출 확인
+          </p>
+          <h1 class="mb-5">
+            선호하는 지역의<br />추천 농작물과 매출을<br />확인해보세요.
+          </h1>
+        </div>
+        <!--Select Area of Map Start-->
+        <div
+          class="col-md-12 col-sm-12 col-xs-12 wyc-map wow fadeInUp 1seq"
+          data-wow-delay="0.3s"
+        >
+          <div class="wyc-area">
+            <img src="img/target_map3.png" alt="전라남도" class="wyc-mapimg" />
+            <div class="wyc-boseong wyc_crop_button">
+              <img src="img/boseong.png" alt="보성" />
+            </div>
+            <div class="wyc-damyang wyc_crop_button">
+              <img src="img/damyang.png" alt="담양" />
+            </div>
+            <div class="wyc-gangjin">
+              <img src="img/gangjin.png" alt="강진" />
+            </div>
+            <div class="wyc-goheung">
+              <img src="img/goheung.png" alt="고흥" />
+            </div>
+            <div class="wyc-gokseong">
+              <img src="img/gokseong.png" alt="곡성" />
+            </div>
+            <div class="wyc-gurye">
+              <img src="img/gurye.png" alt="구례" />
+            </div>
+            <div class="wyc-gwangyang">
+              <img src="img/gwangyang.png" alt="광양" />
+            </div>
+            <div class="wyc-haenam">
+              <img src="img/haenam.png" alt="해남" />
+            </div>
+            <div class="wyc-hampyeng">
+              <img src="img/hampyeong.png" alt="함평" />
+            </div>
+            <div class="wyc-hwasun">
+              <img src="img/hwasun.png" alt="화순" />
+            </div>
+            <div class="wyc-jangheung">
+              <img src="img/jangheung.png" alt="장흥" />
+            </div>
+            <div class="wyc-jangseung">
+              <img src="img/jangseong.png" alt="장성" />
+            </div>
+            <div class="wyc-jindo"><img src="img/jindo.png" alt="진도" /></div>
+            <div class="wyc-mokpo"><img src="img/mokpo.png" alt="목포" /></div>
+            <div class="wyc-muan"><img src="img/muan.png" alt="무안" /></div>
+            <div class="wyc-naju"><img src="img/naju.png" alt="나주" /></div>
+            <div class="wyc-sinan"><img src="img/sinan.png" alt="신안" /></div>
+            <div class="wyc-suncheon">
+              <img src="img/suncheon.png" alt="순천" />
+            </div>
+            <div class="wyc-wando"><img src="img/wando.png" alt="완도" /></div>
+            <div class="wyc-yeongam">
+              <img src="img/yeongam.png" alt="영암" />
+            </div>
+            <div class="wyc-yeonggwang">
+              <img src="img/yeonggwang.png" alt="영광" />
+            </div>
+            <div class="wyc-yeosu"><img src="img/yeosu.png" alt="여수" /></div>
+          </div>
+        </div>
+        <!--Select Area of Map End-->
+        <div
+          class="text-center mx-auto pb-4 wow fadeInUp sec2"
+          data-wow-delay="0.3s"
+          style="max-width: 500px"
+        >
+          <h1 class="select_list_title">농작물을 선택해 주세요.</h1>
+        </div>
+        <!--Select Crop of Area Start-->
+        <div
+          class="col-md-12 col-sm-12 col-xs-12 wyc-select-crop wow bounceInLeft"
+        >
+          <div class="wyc-select-crop-title">
+            <h3><b>추천 농작물</b></h3>
+          </div>
+          <div class="wyc-table">
+            <div class="rice">
+              <img src="img/rice-g6a34bd1f6_640.jpg" alt="정곡" id="rice-img" />
+              <div class="white-board-rice"><p class="rice-text">정곡</p></div>
+            </div>
+            <div class="cucumber">
+              <img
+                src="img/cucumbers-ge85ffc107_640.jpg"
+                alt="오이"
+                id="cucumber-img"
+              />
+              <div class="white-board-cucumber">
+                <p class="cucumber-text">오이</p>
+              </div>
+            </div>
+            <div class="garlic">
+              <img
+                src="img/garlic-g5786021b0_640.jpg"
+                alt="마늘"
+                id="garlic-id"
+              />
+              <div class="white-board-garlic">
+                <p class="garlic-text">마늘</p>
+              </div>
+            </div>
+            <div class="greenonion">
+              <img
+                src="img/green-onions-ga4944781c_640.jpg"
+                alt="대파"
+                id="greenonion-id"
+              />
+              <div class="white-board-greenonion">
+                <p class="greenonion-text">대파</p>
+              </div>
+            </div>
+            <div class="chives">
+              <img
+                src="img/chives-gd423ac875_640.jpg"
+                alt="쪽파"
+                id="chives-img"
+              />
+              <div class="white-board-chives">
+                <p class="chives-text">쪽파</p>
+              </div>
+            </div>
+            <div class="kiwi">
+              <img
+                src="img/kiwi-g99910b204_640.jpg"
+                alt="참다래"
+                id="kiwi-img"
+              />
+              <div class="white-board-kiwi">
+                <p class="kiwi-text">참다래</p>
+              </div>
+            </div>
+            <div class="spinach">
+              <img
+                src="img/spinach-gac5c7ee9c_640.jpg"
+                alt="시금치"
+                id="spinach-img"
+              />
+              <div class="white-board-spinach">
+                <p class="spinach-text">시금치</p>
+              </div>
+            </div>
+            <div class="spotato">
+              <img
+                src="img/sweetpotato-g883fccad1_640.jpg"
+                alt="고구마"
+                id="spotato-img"
+              />
+              <div class="white-board-spotato">
+                <p class="spotato-text">고구마</p>
+              </div>
+            </div>
+            <div class="grape">
+              <img
+                src="img/grapes-gcca62e015_640.jpg"
+                alt="포도"
+                id="grape-img"
+              />
+              <div class="white-board-grape">
+                <p class="grape-text">포도</p>
+              </div>
+            </div>
+            <div class="onion">
+              <img
+                src="img/onions-g01ecbaf45_640.jpg"
+                alt="양파"
+                id="onion-img"
+              />
+              <div class="white-board-onion">
+                <p class="onion-text">양파</p>
+              </div>
+            </div>
+            <div class="peach">
+              <img
+                src="img/peach-g00c085f8b_640.jpg"
+                alt="복숭아"
+                id="peach-img"
+              />
+              <div class="white-board-peach">
+                <p class="peach-text">복숭아</p>
+              </div>
+            </div>
+            <div class="pepper">
+              <img
+                src="img/chili-gc5a3ee00b_640.jpg"
+                alt="건고추"
+                id="pepper-img"
+              />
+              <div class="white-board-pepper">
+                <p class="pepper-text">건고추</p>
+              </div>
+            </div>
+            <div class="stberry">
+              <img
+                src="img/strawberries-gf61cb131d_640.jpg"
+                alt="딸기"
+                id="stberry-img"
+              />
+              <div class="white-board-stberry">
+                <p class="stberry-text">딸기</p>
+              </div>
+            </div>
+            <div class="tomato">
+              <img
+                src="img/tomato-gab149c580_640.jpg"
+                alt="토마토"
+                id="tomato-img"
+              />
+              <div class="white-board-tomato">
+                <p class="tomato-text">토마토</p>
+              </div>
+            </div>
+            <!-- <div class="x1 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x2 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x3 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x4 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x5 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x6 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x7 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x8 x"><img src="img/xImg.jpg" alt="x"></div>
+                        <div class="x9 x"><img src="img/xImg.jpg" alt="x"></div> -->
+            <!-- <div class="x10 x"><img src="img/xImg.jpg" alt="x"></div>
+                            <div class="x11 x"><img src="img/xImg.jpg" alt="x"></div> -->
+          </div>
+        </div>
+        <!--Select Crop of Area End-->
+        <div
+          class="text-center mx-auto wow fadeInUp sec3"
+          data-wow-delay="0.3s"
+          style="max-width: 500px"
+        >
+          <h1 class="">농작물 정보를 확인하세요.</h1>
+        </div>
+        <!--View Crop's Info Selected Start-->
+        <div
+          class="col-md-12 col-sm-12 col-xs-12 wyc-info-crop wow bounceInLeft"
+        >
+          <div class="crop-info-up">
+            <h3>농작물 세부 정보</h3>
+            <div class="info-up-chives">
+              <img src="img/cirlce_chives.png" alt="쪽파" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-cucumber">
+              <img src="img/circle_cucumber.png" alt="오이" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-garlic">
+              <img src="img/circle_garlic.png" alt="마늘" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-grape">
+              <img src="img/circle_grape.png" alt="포도" />
+              <div>
+                <ul>
+                  <li>이름</li>
+                  <li>품종</li>
+                  <li>수확시기</li>
+                  <li>특징</li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-up-greenonion">
+              <img src="img/circle_greenonion.png" alt="대파" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-kiwi">
+              <img src="img/circle_kiwi.png" alt="참다래" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-onion">
+              <img src="img/circle_onion.png" alt="양파" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-peach">
+              <img src="img/circle_peach.png" alt="복숭아" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-pepper">
+              <img src="img/circle_pepper.png" alt="건고추" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-rice">
+              <img src="img/circle_rice.png" alt="정곡" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-spinach">
+              <img src="img/circle_spinach.png" alt="시금치" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-stberry">
+              <img src="img/circle_stberry.png" alt="딸기" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-spotato">
+              <img src="img/circle_spotato.png" alt="고구마" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+            <div class="info-up-tomato">
+              <img src="img/circle_tomato.png" alt="토마토" />
+              <ul>
+                <li>이름</li>
+                <li>품종</li>
+                <li>수확시기</li>
+                <li>특징</li>
+              </ul>
+            </div>
+          </div>
+          <div class="crop-info-down">
+            <h3>농작물 경매단가 & 생산량</h3>
+            <div class="info-down-chives">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="chives_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="chives_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-cucumber">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="cucumber_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="cucumber_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-garlic">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="garlic_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="garlic_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-grape">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="grape_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="grape_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-greenonion">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="greenonion_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="greenonion_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-kiwi">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="kiwi_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="kiwi_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-onion">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="onion_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="onion_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-peach">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="peach_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="peach_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-pepper">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="pepper_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="pepper_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-rice">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="rice_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="rice_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-spinach">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="spinach_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="spinach_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-stberry">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="stberry_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="stberry_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-spotato">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="spotato_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="spotato_yield" class="f2"></canvas>
+              </div>
+            </div>
+            <div class="info-down-tomato">
+              <div class="row gx-4" id="chartContainer_price">
+                <canvas id="tomato_price" class="f1"></canvas>
+              </div>
+              <div class="row gx-4" id="chartContainer_yield">
+                <canvas id="tomato_yield" class="f2"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--View Crop's Info Selected End-->
+      </div>
+      <div class="wyc-btn-box">
+        <div id="total_cost" class="border_default">
+          <div class="total_cost_inner">
+            <div class="wyc-reset">
+              <button class="total_cost_submit2">다시선택</button>
+            </div>
+            <div class="wyc-submit">
+              <button class="total_cost_submit2">매출확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cost_title">
+      <span class="cost_sigungu">나주시</span>의
+      <span class="cost_crop">딸기</span>의 매출은
+      <span class="total_cost">#,###,###</span>원 입니다
+    </div>
+    <div id="modal-container2" class="modal-hidden2">
+      <div id="revenue-modal2">
+        <div class="row gx-4 modal-chives" id="chartContainer">
+          <canvas id="chives"></canvas>
+        </div>
+        <div class="row gx-4 modal-cucumber" id="chartContainer">
+          <canvas id="cucumber"></canvas>
+        </div>
+        <div class="row gx-4 modal-garlic" id="chartContainer">
+          <canvas id="garlic"></canvas>
+        </div>
+        <div class="row gx-4 modal-grape" id="chartContainer">
+          <canvas id="grape"></canvas>
+        </div>
+        <div class="row gx-4 modal-greenonion" id="chartContainer">
+          <canvas id="greenonion"></canvas>
+        </div>
+        <div class="row gx-4 modal-kiwi" id="chartContainer">
+          <canvas id="kiwi"></canvas>
+        </div>
+        <div class="row gx-4 modal-onion" id="chartContainer">
+          <canvas id="onion"></canvas>
+        </div>
+        <div class="row gx-4 modal-peach" id="chartContainer">
+          <canvas id="peach"></canvas>
+        </div>
+        <div class="row gx-4 modal-pepper" id="chartContainer">
+          <canvas id="pepper"></canvas>
+        </div>
+        <div class="row gx-4 modal-rice" id="chartContainer">
+          <canvas id="rice"></canvas>
+        </div>
+        <div class="row gx-4 modal-spinach" id="chartContainer">
+          <canvas id="spinach"></canvas>
+        </div>
+        <div class="row gx-4 modal-stberry" id="chartContainer">
+          <canvas id="stberry"></canvas>
+        </div>
+        <div class="row gx-4 modal-spotato" id="chartContainer">
+          <canvas id="spotato"></canvas>
+        </div>
+        <div class="row gx-4 modal-tomato" id="chartContainer">
+          <canvas id="tomato"></canvas>
+        </div>
+        <form action="" class="modal-data">
+          <button id="submit-modal" type="submit">제출</button>
+          <div id="close-modal2"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div
+      class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5">
+        <div class="row g-5">
+          <div class="col-lg-4 col-md-6">
+            <h5 class="text-white mb-4">Our Office</h5>
+            <p class="mb-2">
+              <i class="fa fa-map-marker-alt me-3"></i>서울시 마포구 신촌로 104
+              4층, 5층<br />그린컴퓨터
+            </p>
+            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>02-715-2111</p>
+            <p class="mb-2">
+              <i class="fa fa-envelope me-3"></i>http://sinchon.greenart.co.kr/
+            </p>
+            <div class="d-flex pt-3">
+              <!-- <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-secondary rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a> -->
+              <a
+                class="btn btn-square btn-secondary rounded-circle me-2"
+                href="https://github.com/Sanghokim91/WYC"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h5 class="text-white mb-4">Quick Links</h5>
+            <a class="btn btn-link" href="recomend.html">농작물 추천</a>
+            <a class="btn btn-link" href="revenue1.html"
+              >매출 확인(농작물우선)</a
+            >
+            <a class="btn btn-link" href="revenue2.html">매출 확인(지역우선)</a>
+            <a class="btn btn-link" href="serviceCost.html">비용 조회</a>
+            <a class="btn btn-link" href="serviceProfit.html">수익 확인</a>
+            <a class="btn btn-link" href="servicePolicyCheck.html"
+              >정부지원 정책들</a
+            >
+            <a class="btn btn-link" href="festival.html">지역축제 & 문화행사</a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h5 class="text-white mb-4">Business Hours</h5>
+            <p class="mb-1">Monday - Friday</p>
+            <h6 class="text-light">09:30 am - 06:20 pm</h6>
+            <p class="mb-1">Saturday</p>
+            <h6 class="text-light">Closed</h6>
+            <p class="mb-1">Sunday</p>
+            <h6 class="text-light">Closed</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid bg-secondary text-body copyright py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="fw-semi-bold" href="#">WYC - Turning to Farm</a>,
+            All Right Reserved.
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+            Designed By
+            <a class="fw-semi-bold" href="https://github.com/Sanghokim91/WYC"
+              >Team WYC</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a
+      href="#"
+      class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
+
+    <!-- <script src="http:/pjax.googleapis.compjax/libs/jquery/1.11.2/jquery.min/js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/revenue2.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <script src="js/chart.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      new WOW().init();
+    </script>
+  </body>
+</html>

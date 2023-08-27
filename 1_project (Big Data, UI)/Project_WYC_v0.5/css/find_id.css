@@ -1,0 +1,102 @@
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.service_box a{
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  font-size: 2.5rem;
+}
+
+.service_box a:hover{
+  color: darkgreen;
+  text-decoration: none;
+}
+
+
+#content{
+  text-align: center;
+  margin-top: 100px;
+  padding: 0;
+  margin-bottom: 200px;
+}
+
+.find_box{
+  margin: 0 auto;
+}
+
+.find_box input{
+  border: none;
+  outline: none;
+}
+
+.service_box{
+  margin: 0 auto;
+}
+
+.login_id_box{
+  margin-bottom: 100px;
+}
+.width_200{
+  width: 200px;
+}
+
+.input_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1rem;
+  text-align: left;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#submit_button{
+  width: 200px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(147, 215, 147);
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-top: 10px;
+}
+
+#submit_button a{
+  color: white;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#submit_button:hover{
+  background-color: rgb(226, 245, 226);
+}
+
+input::placeholder{
+  font-size: 0.6rem;
+  opacity: 50%;
+}
+
+
+@media (max-width : 400px) {
+  .input_box_design{width: 300px;}
+  .width_200{width: 180px;}
+  #submit_button{width: 150px;}
+}
+
+.find_id_title{
+  margin: 0 auto;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+

@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+  /* padding: 0;
+  margin: 0; */
+}
+
+.content{
+  margin-top: 100px;
+}
+
+.my_button{
+  width: 200px;
+  height: 50px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(147, 215, 147);
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.my_button a{
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.member_info_title,
+.history_title{
+  background-color: #065c2a;
+}
+#profitPrediction_page:hover{
+  /* background-color: rgb(226, 245, 226); */
+  background-color: rgb(11, 148, 11);
+}
+
+@media (max-width : 450px) {
+  .welcome_box_design{width: 300px;}
+  .my_button{width: 150px;}
+  .my_button a{font-size: 1.2rem;}
+}
+
+.member_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.2em;
+  text-align: left;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.default_border{
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+.member_info_box{
+  /* width: 100%; */
+  padding: 20px;
+  border-right: 2px solid #595959;
+}
+
+#correction_btn{
+  margin: 0 auto;
+}
+
+#correction_btn_box{
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width : 425px) {
+  .slaes_title,
+  .cost_title{
+    font-size: 1.2rem;
+  }
+  .history_salse_box li,
+  .history_cost_box li{
+    font-size: 1.1rem;
+  }
+}
+
+.table_border th,
+.table_border td,
+.table_border tr{
+  font-size: 1.2rem;
+}
+
+@media (max-width : 425px) {
+  .table_border th,
+  .table_border td,
+  .table_border tr{
+    font-size: 0.8rem;
+  }
+}
+
+.history_box{
+  padding: 20px;
+}
+
+.history_title{
+  font-size: 1.3rem;
+  width: 300px;
+}
+
+.history_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  /* text-align: left; */
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.history_list{
+  padding: 15px 0px 15px 25px;
+}
+
+#profitPrediction_page{
+  margin: 0 auto;
+  font-size: 2rem;
+}
+
+@media (max-width : 991px) {
+  .member_info_box{border-right: none;}
+}
+
+@media (max-width : 400px) {
+  .member_box_design{width: 262px;
+  font-size: 1rem;}
+  .history_box_design{width: 262px;}
+  .history_title{width: 250px;}
+  #correction_btn{font-size: 1.8rem;}
+}
+
+.slaes_list_ul li,
+.cost_list_ul li{
+  padding: 5px 0px;
+}
+
+.dis_none{
+  display: none;
+}
+
+.table_border{
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.table_border td, th, td{
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.member_info_box_update{
+  padding: 20px;
+}
+
+.member_info_box_update input{
+  outline: none;
+  border: none;
+}
