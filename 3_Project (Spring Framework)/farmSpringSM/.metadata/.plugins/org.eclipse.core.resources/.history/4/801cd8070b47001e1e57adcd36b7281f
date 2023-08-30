@@ -1,0 +1,504 @@
+/**
+ * 
+ */
+
+//페이지 이동시 발생 이벤트
+(function ($) {
+  "use strict";
+
+  // Spinner
+  var spinner = function () {
+    setTimeout(function () {
+      if ($("#spinner").length > 0) {
+        $("#spinner").removeClass("show");
+      }
+    }, 1);
+  };
+  spinner();
+
+  // Initiate the wowjs
+  new WOW().init();
+
+  // Sticky Navbar
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      $(".sticky-top").addClass("shadow-sm").css("top", "0px");
+    } else {
+      $(".sticky-top").removeClass("shadow-sm").css("top", "-100px");
+    }
+  });
+
+  // Back to top button
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      $(".back-to-top").fadeIn("slow");
+    } else {
+      $(".back-to-top").fadeOut("slow");
+    }
+  });
+  
+  $(".back-to-top").click(function () {
+    $("html, body").animate({ scrollTop: 0 }, 1500, "easeInOutExpo");
+    return false;
+  });
+  
+//동적으로 생성하기 07.18
+  
+})(jQuery);
+
+
+
+//동적으로 지역 리스트 생성하기
+const area = document.querySelector("#area");
+
+$(".btn-crop").change(function() {	//선택된 농작물이 바뀔때마다 실행
+	  if ($(this).is(":checked")) {
+	    var selectedCrop = $(this).val(); // 선택된 농작물 값
+	    let str = "";
+	    $.ajax({	    // 서버에 비동기 요청 보내기
+	      type: "GET",
+	      url: "cropArea.do", // 서버에서 데이터를 가져올 URL
+	      data: { crop: selectedCrop }, // 요청 파라미터로 선택된 농작물 전달
+	      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	      dataType: 'json',
+	      success: function(model) {
+	    	  
+	    	for(let i=0; i<model.length; i++){
+     		str += "<tr>"+
+  						"<td class='select_area_td'>"+
+  							"<input type='radio' name='select_area_radio_name' id='"+model[i].areaEng+
+  							"' value='"+model[i].areaEng+"' class='select_area_radio'>"+
+  							"<label for='"+model[i].areaEng+"' class='select_area_radio_label'>"+model[i].areaName+"</label>"+
+  						"</td>"+
+  					"</tr>"
+	    	}
+	    
+	    	area.innerHTML = str;
+	    	
+	    	//상세 정보 및 이미지를 동적으로 생성하는 함수
+	    	image_fun(selectedCrop);
+	    	
+	    	//자동으로 첫번쨰 지역 선택(사용자 편의)
+	        const firstAreaRadio = document.querySelectorAll("input[name='select_area_radio_name']");
+	        firstAreaRadio[0].click();
+	      },
+	      error: function() {
+	        console.log("서버 요청 실패");
+	      }
+	    });
+	  }
+	});
+
+//동적으로 리스트 생성하기 fetch를 사용한 코드 start
+//const area = document.querySelector("#area");
+//
+//$(".btn-crop").change(function() {
+//  if ($(this).is(":checked")) {
+//    var selectedCrop = $(this).val(); // 선택된 농작물 값
+//    let str = "";
+//    console.log(selectedCrop);
+//
+//    fetch("cropArea.do?crop=" + encodeURIComponent(selectedCrop), {
+//      method: "GET",
+//      headers: {
+//        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+//      },
+//    })
+//      .then((response) => {
+//        if (!response.ok) {
+//          throw new Error("서버 요청 실패");
+//        }
+//        return response.json();
+//      })
+//      .then((model) => {
+//        for (let i = 0; i < model.length; i++) {
+//          str += "<tr>" +
+//            "<td class='select_area_td'>" +
+//            "<input type='radio' name='select_area_radio_name' id='" + model[i].areaEng + "' value='" + model[i].areaName + "' class='select_area_radio'>" +
+//            "<label for='" + model[i].areaEng + "' class='select_area_radio_label'>" + model[i].areaName + "</label>" +
+//            "</td>" +
+//            "</tr>";
+//        }
+//
+//        area.innerHTML = str;
+//
+//        image_fun(selectedCrop);
+//      })
+//      .catch((error) => {
+//        console.log(error.message);
+//      });
+//  }
+//});
+//동적으로 리스트 생성하기 fetch를 사용한 코드 end
+
+
+//상세 정보 불러오기
+function image_fun(selectedCrop) {
+	console.log("image_fun() 실행");
+	  const btnCrop = document.querySelectorAll(".btn-crop");
+	  const page = document.querySelector(".page");
+		
+	  const crops_map = document.querySelectorAll('input[name="flexRadioDefault"]');
+	  
+	  let checkedIndex_crop = -1;
+	  let crop_checked = null;
+
+	  crops_map.forEach((crop_map, index_crop) => {
+	    if (crop_map.checked) {
+	      checkedIndex_crop = index_crop;
+	      crop_checked = crop_map;
+	    }
+	  });
+	  console.log("crop_checked 실행 : " + selectedCrop);
+
+	  $.ajax({
+		    type: "GET",
+		    url: "cropProfile.do",
+		    data: { selectCrop : selectedCrop,},
+		    dataType: "json",
+		    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		    success: function(model) {
+		    	console.log("cropProfile 연결 성공")
+//		    	console.log("imgModel : " + model);
+		    	
+		    	cropEng = model[0].cropEng;
+		    	console.log("cropEng : " + cropEng);
+		    	
+		  	  page.innerHTML =
+		  	    `
+		  	  <div class="page-content page-container" id="page-content">
+		  	  <div class="row gutter_0">
+		  	  <div class="card card_custom gutter_0">
+		  	  <div class="card-header gutter_0 bg_custom">
+		  	  <strong class="card_title">`+model[0].cropName+` 상세 정보</strong>
+		  	  </div>
+		  	  <div class="card-body">
+		  	    <div class="card_crop_img col-xs-12">
+		            <img src="/myapp/resources/img/profile_`+model[0].cropEng+`.jpg" style="height: 150px; width: 100%; border-radius: 10px; margin-bottom:10px;">
+		          </div>
+		         <div class="card_crop_list col-xs-8">
+		  	     <ul class="col-xs-12 profile_ul">
+		           	<li class="col-xs-12">이름 : `+model[0].cropName+`</li>
+		              <li class="col-xs-12">종 분류 : `+model[0].cropVariety+`</li>
+		              <li class="col-xs-12">재배 시기 : `+model[0].cropGrow+`</li>
+		              <li class="col-xs-12">특이사항 : `+model[0].cropSpecial+`</li>
+		            </ul>
+		          </div>
+		  	  </div>
+		  	  		              <div class="card_footer row">
+                        <div class="hPrice_btn_box offset-md-1 col-md-5 offset-2 col-8 offset-2 mb-3">
+                          <input type="button" id="hPrice_btn" data-toggle="modal" data-target="#hPrice_draw" style="width: 100%;" value="경매 단가 확인">
+                        </div>
+                        <div class="hPrice_btn_box offset-md-1 col-md-4 offset-2 col-8 offset-2 mb-3">
+                          <input type="button" id="yield_btn" data-toggle="modal" data-target="#yield_draw" style="width: 100%;" value="생산량 확인">
+                        </div>
+                      </div>
+		  	  `;
+		  	  
+		  	  let selectCrop_kor = model[0].cropName;
+		  	  
+		  	  const hPrice_btn = document.querySelector("#hPrice_btn");
+		  	  const yield_btn = document.querySelector("#yield_btn");
+		  	  
+		  	  hPrice_btn.addEventListener("click" ,() => {
+		  		 hPrice_btn_fun(selectedCrop, selectCrop_kor);
+		  	  });
+		  	  
+		  	  yield_btn.addEventListener("click" ,() => {
+		  		  yield_btn_fun(selectedCrop, selectCrop_kor);
+		  	  });
+
+
+		    },
+		    error: function() {
+		      console.log("서버 요청 실패");
+		    }
+		  });
+	  
+
+}
+
+
+//경매 단가 차트 모달창
+function hPrice_btn_fun(selectCrop, selectCrop_kor) {
+		  $.ajax({
+			    type: "GET",
+			    url: "cropHpriceYield.do",
+			    data: { selectCrop : selectCrop,},
+			    dataType: "json",
+			    success: function(model) {
+			    	console.log("cropHpriceYield 연결 성공")
+			    	console.log("model : " + model);
+			    	
+			    	let hPrice = [];
+			    	
+			    	for(let i=0; i<model.length; i++){
+			    		hPrice.push(parseInt(model[i].hPrice, 10));
+			    	}
+			    	
+			    	let existingChart = Chart.getChart("chart_price");
+			    	if (existingChart) {
+			    		existingChart.destroy();
+			    	}
+			    	
+			    	
+			    	var hPrice_data = {
+			    			  labels: [2017, 2018, 2019, 2020, 2021],
+			    			  datasets: [
+			    			    {
+			    			      label: selectCrop_kor+" 경매 단가 추이(10a, 만원)",
+			    			      data: hPrice,
+			    			      fill: false,
+			    			      borderColor: "rgb(207, 142, 255)",
+			    			      tension: 0.2,
+			    			    },
+			    			  ],
+			    			};
+			    			var ctx = document.getElementById("chart_price").getContext("2d");
+			    			var myChart = new Chart(ctx, {
+			    			  type: "line",
+			    			  data: hPrice_data,
+			    			  options: {},
+			    			});	
+			    	
+			    },
+			    error: function() {
+			      console.log("cropHpriceYield 서버 요청 실패");
+			    }
+			  });
+
+
+}
+
+
+
+
+//생산량 차트 모달창
+function yield_btn_fun(selectCrop, selectCrop_kor) {
+	  $.ajax({
+		    type: "GET",
+		    url: "cropHpriceYield.do",
+		    data: { selectCrop : selectCrop,},
+		    dataType: "json",
+		    success: function(model) {
+		    	console.log("cropHpriceYield 연결 성공")
+		    	console.log("model : " + model);
+		    	
+		    	let yield_arr = [];
+		    	
+		    	for(let i=0; i<model.length; i++){
+		    		yield_arr.push(parseInt(model[i].yield, 10));
+		    	}
+		    	
+		    	let existingChart = Chart.getChart("chart_yield");
+		    	if (existingChart) {
+		    		existingChart.destroy();
+		    	}
+		    	
+		    	
+		    	var yield_data = {
+		    			  labels: [2017, 2018, 2019, 2020, 2021],
+		    			  datasets: [
+		    			    {
+		    			      label: selectCrop_kor+" 생산량 추이(10a, 만원)",
+		    			      data: yield_arr,
+		    			      fill: false,
+		    			      borderColor: "rgb(207, 142, 255)",
+		    			      tension: 0.2,
+		    			    },
+		    			  ],
+		    			};
+		    			var ctx = document.getElementById("chart_yield").getContext("2d");
+		    			var myChart = new Chart(ctx, {
+		    			  type: "line",
+		    			  data: yield_data,
+		    			  options: {},
+		    			});	
+		    },
+		    error: function() {
+		      console.log("cropHpriceYield 서버 요청 실패");
+		    }
+		  });
+}
+
+
+let salesResult = null;
+let cropKor = null;
+let areaKor = null;
+
+
+//매출 확인 버튼 클릭시 이벤트
+const total_sales_chart = document.querySelector("#total_sales_chart");
+const total_cost = document.querySelector(".total_cost");
+const cost_sigungu = document.querySelector(".cost_sigungu");
+const cost_crop = document.querySelector(".cost_crop");
+
+
+total_sales_chart.addEventListener("click", (e) => {
+	let checkedValueCrop = null;
+	let checkedValueArea = null;
+	
+	//농작물 검색 조건
+	const selectCrops = document.querySelectorAll('input[name="flexRadioDefault"]');
+	selectCrops.forEach((selectCrop) => {	
+	  if (selectCrop.checked) {
+	    checkedValueCrop = selectCrop.value;	//선택된 농작물 이름
+	  }
+	});
+	
+	//지역 검색 조건
+	const selectAreas = document.querySelectorAll('input[name="select_area_radio_name"]');
+	selectAreas.forEach((selectArea) => {
+	  if (selectArea.checked) {
+	    checkedValueArea = selectArea.value;	//선택된 지역 이름
+	    
+	    // label 값을 가져오기 위해 input 요소의 id를 사용하여 label을 찾음
+	    const labelElement = document.querySelector(`label[for="${selectArea.id}"]`);
+	    areaKor = labelElement.innerHTML;
+	  }
+	});
+	
+	//form으로 넘길 데이터 중 지역 설정
+	const areaEng = document.querySelector(".areaEng");
+	areaEng.value = checkedValueArea;
+	
+	console.log("checkedValueCrop : " + checkedValueCrop)
+	console.log("checkedValueArea : " + checkedValueArea)
+	
+	//조건 미선택시 기능 동작 x
+	if (checkedValueCrop == null || checkedValueArea == null) {
+//		alert("농작물과 지역 모두 선택 해주세요.");
+		e.stopPropagation();
+		e.preventDefault(); // 기본 동작 방지
+		swal({
+		    title: "WYC",
+		    text: "농작물과 지역 모두 선택 해주세요.",
+		    icon: "info" //"info,success,warning,error" 중 택1
+		})
+		}else {
+	
+		//모달 title에 농작물 이름 받아오기
+		let checkedIndex = -1;
+
+		for (let i = 0; i < selectCrops.length; i++) {
+		  if (selectCrops[i].checked) {
+		    checkedIndex = i;
+		    break; // 체크된 요소를 찾았으면 반복문 종료
+		  }
+		}
+		const form_check_label = document.querySelectorAll(".form-check-label");
+
+		// 서버에 비동기 요청 보내기 (AJAX) 비용 받아오기
+	  $.ajax({
+	    type: "GET",
+	    url: "salesCheck.do", // 서버에서 데이터를 가져올 URL (받아올 데이터에 맞게 변경)
+	    data: { selectCrop : checkedValueCrop,
+	    		selectArea : checkedValueArea,},
+	    dataType: "json",
+	    success: function(model) {
+	    	//revenu1의 form갑 salesResult 설정 (매출액)
+	    	salesResult = model[model.length - 1].toLocaleString();
+	    	document.querySelector(".salesResult").value = model[model.length - 1];
+	    	total_cost.innerHTML = salesResult;
+
+	    	//농작물 이름 제공
+	    	cropKor =  form_check_label[checkedIndex].innerHTML;
+	    	cost_crop.innerHTML = cropKor;
+	    	cost_sigungu.innerHTML = areaKor;
+
+	    	console.log("cropKor : " + cropKor)
+	    	
+	    	//차트 그리는 메소드
+	    	drawChart(model);
+	    },
+	    error: function() {
+	      console.log("서버 요청 실패");
+	    }
+	  });
+	}
+});
+
+
+//차트 그리는 메소드
+function drawChart(data) {
+	  // 이 부분에서 받은 데이터(data)를 사용하여 그래프를 그리는 로직을 작성합니다.
+	  // 예시: Chart.js를 사용하여 그래프를 그리는 경우
+	  // Chart.js가 먼저 페이지에 로드되어 있어야 합니다.
+	
+	const divisionData = data.map((value) => value / 10000);
+	console.log("divisionData : " + divisionData)
+	console.log("data : " + data)
+	
+	let existingChart = Chart.getChart('mychart');
+	if (existingChart) {
+		existingChart.destroy();
+	}
+	
+	var chart_data = {
+			  labels: [
+			    2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+			    2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023,
+			  ],
+			  datasets: [
+			    {
+			      label: "매출 추이(10a, 만원)",
+			      data: divisionData,
+			      fill: false,
+			      borderColor: "rgb(207, 142, 255)",
+			      tension: 0.3,
+			    },
+			  ],
+			};
+			var ctx = document.getElementById("mychart").getContext("2d");
+			var myChart = new Chart(ctx, {
+			  type: "line",
+			  data: chart_data,
+			  options: {},
+			});	
+	}
+	
+
+
+
+//if문으로 데이터 null시 데이터를 분석 하라는 메세지와 함께 저장하기
+//저장할때 더 직관적으로 보이는 데이터 값 생각 해보기
+const total_sales_submit = document.querySelector("#total_sales_submit");
+//const selectCropKor = document.querySelector(".selectCropKor");
+
+total_sales_submit.addEventListener("click", (e) => {
+	
+	if (salesResult == null) {
+//		alert("매출을 먼저 확인 해주세요");
+		e.stopPropagation();
+		e.preventDefault(); // 기본 동작 방지
+		swal({
+		    title: "WYC",
+		    text: "매출을 먼저 확인 해주세요.",
+		    icon: "info" //"info,success,warning,error" 중 택1
+		})
+	}else {
+//		selectCropKor.value = cropKor;
+//		alert("비용 분석 페이지로 이동 합니다");
+		swal({
+		    title: "WYC",
+		    text: "비용 분석 페이지로 이동 합니다.",
+		    icon: "success" //"info,success,warning,error" 중 택1
+		}).then( () => {
+			document.formR1.submit();
+		})
+	}
+});
+
+
+
+//디폴트로 고구마 체크 하기
+document.addEventListener("DOMContentLoaded", function() {
+    const firstCropRadio = document.querySelectorAll("input[name='flexRadioDefault']");
+    firstCropRadio[0].click();
+});
+
+
+
+
+
+

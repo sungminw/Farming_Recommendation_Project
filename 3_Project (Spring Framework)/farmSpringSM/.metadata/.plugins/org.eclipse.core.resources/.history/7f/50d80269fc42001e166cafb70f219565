@@ -1,0 +1,259 @@
+		var myChart; // 차트 객체를 저장할 변수 선언
+
+        // 차트를 그리는 함수
+        function drawChart(data) {
+            // 기존 차트가 있으면 삭제
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['매출', '비용', '정책 지원금', '수익'],
+                    datasets: [{
+                        label: 'Data',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                	maxBarThickness: 100,
+                	plugins:{
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    } 
+                }
+            });
+        }
+        
+        
+        // 데이터를 테이블에 쭉 옆으로 나열되게 추가하는 함수
+           function addDataToTable(data) {
+               var table = document.getElementById('dataTable');
+
+               // 기존 테이블 데이터 모두 제거
+               while (table.rows.length > 1) {
+                   table.deleteRow(1);
+               }
+
+               // 데이터를 테이블에 추가 (옆으로 나열)
+               var newRow = table.insertRow();
+               data.forEach((value, index) => {
+                   var newCell = newRow.insertCell();
+                   var formattedValue = formatNumber(value);
+                   newCell.textContent = formattedValue;
+               });
+           }
+           
+        // 숫자를 원하는 형식으로 포맷팅하는 함수
+           function formatNumber(number) {
+               return number.toLocaleString('ko-KR') + '원';
+           }
+
+           // 폼 제출 버튼 클릭 이벤트 핸들러
+           $("#resultForm").submit(function(event) {
+               event.preventDefault(); // 폼 기본 제출 동작을 막음
+               
+               const select_work_select = document.querySelector("#select_work_select");
+               const select_area_select = document.querySelector("#select_area_select");
+               workPerson = parseInt(select_work_select.value);
+               areaSize = parseInt(select_area_select.value);
+               
+               console.log("workPerson : "+workPerson)
+               console.log("areaSize : "+areaSize)
+               
+               let calcuSalesResult = salesResult*areaSize;
+               let calcuCostResult = costResult*areaSize+(workPerson*2720000);
+               let calcuProfit = calcuSalesResult-calcuCostResult;
+               let data = [calcuSalesResult, calcuCostResult, costPolicy, calcuProfit]
+               
+             drawChart(data);
+             addDataToTable(data);
+           });
+
+//08.06
+
+//농작물 및 지역 셀릭트 박스 값 설정
+document.addEventListener("DOMContentLoaded", function () {
+	//매출 및 비용 확인 or 미확인시 기능
+	if(crop && area){
+	// 농작물에 해당하는 선택 옵션 설정
+	  var cropSelect = document.getElementById("filterSelect");
+	  for (var i = 0; i < cropSelect.options.length; i++) {
+	    if (cropSelect.options[i].value === crop) {
+	      cropSelect.options[i].selected = true;
+	      
+	      //나머지 옵션 숨기기
+	      var selectedValue = cropSelect.value;
+	      var options = cropSelect.options;
+
+	      for (var i = 0; i < options.length; i++) {
+	          if (options[i].value !== selectedValue) {
+	              options[i].classList.add("hidden-option");
+	          } else {
+	              options[i].classList.remove("hidden-option");
+	          }
+	      }
+	      break;
+	    }
+	  }
+
+	  // 지역명에 해당하는 선택 옵션 설정
+	  var regionSelect = document.getElementById("regionSelect");
+	  for (var j = 0; j < regionSelect.options.length; j++) {
+	    if (regionSelect.options[j].value === area) {
+	      regionSelect.options[j].selected = true;
+	      
+	      //나머지 옵션 숨기기
+	      var selectedValue = regionSelect.value;
+	      var options = regionSelect.options;
+
+	      for (var i = 0; i < options.length; i++) {
+	          if (options[i].value !== selectedValue) {
+	              options[i].classList.add("hidden-option");
+	          } else {
+	              options[i].classList.remove("hidden-option");
+	          }
+	      }
+	      
+	      break;
+	    }
+	  }
+	} else {
+		swal({
+		    title: "WYC",
+		    text: "매출 및 비용 확인 후 수익 계산이 가능 합니다.",
+		    icon: "info" //"info,success,warning,error" 중 택1
+		}).then(() => {
+			window.location.href = "serviceSales1.do";
+	    });
+	}
+});
+
+
+
+/******************************************************************************/
+/** 작물 - 지역 필터**/
+// 버튼 목록을 가져옵니다.
+const buttonContainer = document.getElementById('buttonContainer');
+const filterButtons = document.querySelectorAll('.filterButton');
+
+// 필터링 기준이 되는 셀렉터를 가져옵니다.
+const filterSelect = document.getElementById('filterSelect');
+
+// 셀렉터 변경 시 필터링 함수를 호출합니다.
+filterSelect.addEventListener('change', filterButtonsByCondition);
+
+// 필터링 함수 정의
+function filterButtonsByCondition() {
+  const selectedCondition = filterSelect.value;
+
+  // 모든 버튼을 숨깁니다.
+  filterButtons.forEach(button => {
+    button.style.display = 'none';
+  });
+
+  // 선택한 조건에 맞는 버튼만 표시합니다.
+  const filteredButtons = document.querySelectorAll(`.${selectedCondition}`);
+  filteredButtons.forEach(button => {
+    button.style.display = 'block';
+  });
+}
+
+// 페이지 로드시 기본적으로 전체 버튼을 표시합니다.
+filterButtonsByCondition();
+
+
+/******************************************************************************/
+
+//const reset_button = document.querySelector("#reset_button")
+//
+//reset_button.addEventListener("click", ()=>{
+//  const visualization_text = document.querySelector(".visualization_text")
+//
+//  visualization_text.innerHTML = "<div class='default_message'>" +"원하는 경작면적과 노동인구를 선택하세요."+ "</div>";
+//
+//  const graph_image = document.querySelector(".graph_image")
+//  const chart_title = document.querySelector(".chart_title")
+//  const visualization_graph = document.querySelector(".visualization_graph")
+//  
+//  graph_image.style.display = "none"
+//  chart_title.style.display = "none"
+//  visualization_graph.style.display = "none"
+//})
+
+//금액 제공 테이블
+const salesResultTd = document.querySelector(".salesResultTd");
+const costResultTd = document.querySelector(".costResultTd");
+const costPolicyTd = document.querySelector(".costPolicyTd");
+const profitTd = document.querySelector(".profitTd");
+
+let totalProfit = null;
+if(isNaN(salesResult)){
+	salesResult = 0;
+}
+if(isNaN(costResult)){
+	costResult = 0;
+}
+if(isNaN(costPolicy)){
+	costPolicy = 0;
+}
+//if(isNaN(totalProfit)){
+//	totalProfit = 0;
+//}
+
+window.onload = function() {
+	//그래프에 사용할 데이터 배열
+	let total_data = [salesResult, costResult, costPolicy, (salesResult-costResult+costPolicy)]
+	//수익 계산식 화면에 표시
+	profit_table()
+	//그래프 제공
+	drawChart(total_data)
+		
+}
+
+//수익 계산식 및 값 화면에 표시
+function profit_table() {
+	salesResultTd.innerHTML = salesResult.toLocaleString()+ "원";
+	costResultTd.innerHTML = costResult.toLocaleString()+ "원";
+	costPolicyTd.innerHTML = costPolicy.toLocaleString()+ "원";
+	totalProfit = (salesResult-costResult+costPolicy);
+	profitTd.innerHTML = totalProfit.toLocaleString()+ "원";
+
+}
+
+//선택된 작물 이외의 값은 다 보이지 않게 설정
+//document.getElementById("filterSelect").addEventListener("change", function () {
+//    var selectedValue = this.value;
+//    var options = this.options;
+//
+//    for (var i = 0; i < options.length; i++) {
+//        if (options[i].value !== selectedValue) {
+//            options[i].classList.add("hidden-option");
+//        } else {
+//            options[i].classList.remove("hidden-option");
+//        }
+//    }
+//});
+
+   

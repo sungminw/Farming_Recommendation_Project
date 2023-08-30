@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.farm.myapp.board.dao.IFarmBoardRepository">
+
+	<resultMap type="com.farm.myapp.board.model.FarmBoardVO" id="boardVO">
+		<result property="bId" column="bId"/>
+		<result property="bName" column="bName"/>
+		<result property="bTitle" column="bTitle"/>
+		<result property="bContent" column="bContent"/>
+		<result property="bDate" column="bDate"/>
+		<result property="bHit" column="bHit"/>
+		<result property="bGroup" column="bGroup"/>
+		<result property="bStep" column="bStep"/>
+		<result property="bIndent" column="bIndent"/>
+	</resultMap>
+	
+	<!--전체 리스트 불러오기 -->
+	<select id="list" resultMap="boardVO">
+		select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent 
+		from TURN_TO_FARM_BOARD 
+		order by bGroup desc, bStep asc
+	</select>
+
+	<!-- 글 작성  -->
+	<insert id="write" parameterType="com.farm.myapp.board.model.FarmBoardVO">
+		insert into TURN_TO_FARM_BOARD(bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) 
+		values (TURN_TO_FARM_BOARD_seq.nextval, #{bName}, #{bTitle}, #{bContent}, 0, TURN_TO_FARM_BOARD_seq.currval, 0, 0)
+	</insert>
+	
+	<!--조회수 카운트 -->
+	<update id="upHit" parameterType="String">
+		update TURN_TO_FARM_BOARD set bHit = bHit + 1 where bId =#{strID}
+	</update>
+	
+	<!-- 게시글 세부 정보 들어가기 -->
+	<select id="contentView" parameterType="Integer" resultMap="boardVO">
+		select * from TURN_TO_FARM_BOARD where bId=#{bId}
+	</select>
+	
+	<!--게시글 수정하기 -->
+	<update id="modify" parameterType="com.farm.myapp.board.model.FarmBoardVO">
+		update TURN_TO_FARM_BOARD set bTitle=#{bTitle}, bContent=#{bContent} where bId=#{bId}
+	</update>
+	
+	<!-- 게시글 삭제하기 -->
+	<delete id="delete" parameterType="com.farm.myapp.board.model.FarmBoardVO">
+		delete from TURN_TO_FARM_BOARD where bId=#{bId}
+	</delete>
+	
+	<!-- 댓글 작성 페이지로 이동 -->
+	<select id="replyView" parameterType="Integer" resultMap="boardVO">
+		select * from TURN_TO_FARM_BOARD where bId=#{strID}
+	</select>
+	
+	<!-- 댓글 위치 및 들여쓰기 지정 -->
+	<update id="replyShape" parameterType="String">
+		update TURN_TO_FARM_BOARD set bStep = bStep + 1 where bGroup = #{strGroup} and bStep > #{strStep}
+	</update>
+	
+	<!-- 댓글 작성 기능 -->
+	<insert id="reply" parameterType="com.farm.myapp.board.model.FarmBoardVO">
+		insert into TURN_TO_FARM_BOARD (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) 
+		values (TURN_TO_FARM_BOARD_seq.nextval, #{bName}, #{bTitle}, #{bContent}, #{bGroup}, #{bStep}+1, #{bIndent}+1)
+	</insert>
+	
+</mapper>
+<!-- //	private void replyShape(String strGroup, String strStep) { -->
+<!-- //		String sql = "update TURN_TO_FARM_BOARD set bStep = bStep + 1 where bGroup = ? and bStep > ?"; -->
+<!-- //		int group = Integer.parseInt(strGroup); -->
+<!-- //		int step = Integer.parseInt(strStep); -->
+<!-- //		jdbcTemplate.update(sql, group, step); -->
+<!-- //	} -->
+<!-- //	 -->
+<!-- //	@Override -->
+<!-- //	public void reply(FarmBoardVO dto) { -->
+<!-- //		replyShape(Integer.toString(dto.getbGroup()), Integer.toString(dto.getbStep())); -->
+<!-- //		 -->
+<!-- //		String sql = "insert into TURN_TO_FARM_BOARD (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (TURN_TO_FARM_BOARD_seq.nextval, ?, ?, ?, ?, ?, ?)"; -->
+<!-- //		jdbcTemplate.update(sql, -->
+<!-- //				dto.getbName(), -->
+<!-- //				dto.getbTitle(), -->
+<!-- //				dto.getbContent(), -->
+<!-- //				dto.getbGroup(), -->
+<!-- //				dto.getbStep()+1, -->
+<!-- //				dto.getbIndent()+1 -->
+<!-- //		); -->
+<!-- //	} -->

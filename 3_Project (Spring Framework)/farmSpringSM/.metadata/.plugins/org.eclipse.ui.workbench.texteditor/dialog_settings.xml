@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="double" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="int"/>
+			<item value="totalProfit"/>
+			<item value="costResultTd"/>
+			<item value="costResultDefualt"/>
+			<item value="costResult"/>
+			<item value="operCost"/>
+			<item value="operTotalDefualt"/>
+			<item value="get"/>
+			<item value="ge"/>
+			<item value="policyCost"/>
+			<item value="costPolicy"/>
+			<item value="resultList"/>
+			<item value="operTotal"/>
+			<item value="salesResult"/>
+			<item value="costResult "/>
+		</list>
+		<list key="replacehistory">
+			<item value="double"/>
+			<item value="servicePolicy"/>
+			<item value="aeaCropList"/>
+			<item value="cropHpriceYield"/>
+			<item value="cropRadio"/>
+			<item value=""/>
+			<item value="&lt;%= contextPath %&gt;"/>
+			<item value="farmBoardRepository"/>
+			<item value="@Param"/>
+			<item value="@RequestParam"/>
+			<item value="${path}/resources/"/>
+			<item value="pepper"/>
+			<item value="grape"/>
+			<item value="tomato"/>
+			<item value="kiwi"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="393" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="524" key="DIALOG_HEIGHT"/>
+		<item value="2178" key="DIALOG_X_ORIGIN"/>
+		<item value="715" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.farm.myapp.sales.dao.IFarmsalesRepository">
+
+	<!-- 농작물 리스트 받아올 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesCropVO" id="cropList">
+		<result property="cropNum" column="crop_num"/>
+		<result property="cropName" column="crop_name"/>
+		<result property="cropEng" column="crop_eng"/>
+	</resultMap>
+	
+	<!-- 지역 리스트 받아올 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesCropAreaVO" id="areaList">
+		<result property="areaEng" column="area_eng"/>
+		<result property="areaName" column="area_name"/>
+		<result property="cropName" column="crop_name"/>
+		<result property="cropEng" column="crop_eng"/>
+	</resultMap>
+	
+	<!-- 농작물 요약 정보 받아올 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesCropProfileVO" id="cropProfile">
+		<result property="cropEng" column="cropEng"/>
+		<result property="cropName" column="cropName"/>
+		<result property="cropVariety" column="cropVariety"/>
+		<result property="cropGrow" column="cropGrow"/>
+		<result property="cropGather" column="cropGather"/>
+		<result property="cropSpecial" column="cropSpecial"/>
+	</resultMap>
+	
+	<!-- 최근 5년간 농작물 경매 단가 및 생산량 조회시 사용할 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesCropHpriceYieldVO" id="cropHpriceYield">
+		<result property="year" column="YEAR"/>
+		<result property="hPrice" column="HPRICE"/>
+		<result property="yield" column="YIELD"/>
+	</resultMap>
+	
+	<!-- 지역 선택 시 재배 가능한 농작물 리스트 조회시 사용할 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesAreaCropVO" id="areaCropList">
+		<result property="areaEng" column="area_eng"/>
+		<result property="areaName" column="area_name"/>
+		<result property="cropName" column="crop_name"/>
+		<result property="cropEng" column="crop_eng"/>
+	</resultMap>
+	
+		<!-- 지역 선택 시 재배 가능한 농작물 리스트 조회시 사용할 객체 -->
+	<resultMap type="com.farm.myapp.sales.model.FarmSalesPredictVO" id="cropPredict">
+		<result property="year" column="year"/>
+		<result property="pcost" column="pcost"/>
+		<result property="dcost" column="dcost"/>
+		<result property="temp" column="temp"/>
+	</resultMap>
+	
+		private int year;
+	private int pcost;
+	private int dcost;
+	private int temp;
+	private int rain;
+	private int sun;
+	private int insolation;
+	private int hprice;
+	private int gdp;
+	private int area;
+	private int yield;
+
+	<!--농작물 리스트 받아오기 -->
+	<select id="getCropList" resultMap="cropList">
+		SELECT * FROM cropList ORDER BY crop_name
+	</select>
+	
+	<!--선택한 농작물 재배 가능 지역 조회 -->
+	<select id="getCropAreaList" parameterType="String" resultMap="areaList">
+		SELECT * FROM area_Crops WHERE crop_eng=#{crop} ORDER BY area_name
+	</select>
+	
+	<!--농작물 요약 정보 조회 -->
+	<select id="getCropProfile" parameterType="String" resultMap="cropProfile">
+		SELECT * FROM crop_profile WHERE cropEng=#{crop}
+	</select>
+
+	<!--최근 5년간 농작물 경매 단가 및 생산량 조회 -->
+	<select id="getCropHpriceYield" parameterType="String" resultMap="cropHpriceYield">
+		SELECT YEAR, HPRICE, YIELD FROM ${crop}_matrix WHERE YEAR IN (2017, 2018, 2019, 2020, 2021)
+	</select>
+	
+	<!-- 최근 20년간 농작물 매출액 조회 -->
+	<select id="getSalesList" parameterType="String" resultType="Integer">
+		SELECT revenue FROM ${selectCrop}_matrix ORDER BY year
+	</select>
+	
+	<!-- 내년 예상 매출액 조회-->
+	<select id="getSalespredict" parameterType="String" resultType="Integer">
+		SELECT revenue FROM salesCostInfo WHERE crop_eng=#{selectCrop} AND area_eng=#{selectArea} 
+	</select>
+	
+	<!-- 지역 선택 시 재배 가능한 농작물 리스트 조회 -->
+	<select id="getAreaCropList" parameterType="String" resultMap="areaCropList">
+		SELECT * FROM area_crops WHERE area_eng=#{area}
+	</select>
+	
+</mapper>

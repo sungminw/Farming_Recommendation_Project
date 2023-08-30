@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  /* padding: 0;
+  margin: 0; */
+}
+
+#content{
+  text-align: center;
+  margin-top: 100px;
+  padding: 0;
+}
+
+.pw_content{
+  text-align: center;
+}
+
+
+.input_box_design{
+  border: 2px solid #595959;
+  padding: 20px 10px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  text-align: left;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#submit_button{
+  width: 200px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(147, 215, 147);
+  color: white;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-top: 10px;
+}
+
+#submit_button a{
+  color: white;
+}
+
+#submit_button:hover{
+  background-color: rgb(226, 245, 226);
+}
+
+input::placeholder{
+  font-size: 0.7rem;
+  opacity: 50%;
+}
+
+.pw_check_box  input{
+  outline: none;
+  border: none;
+}
+
+.pw_check_title {
+  color: rgb(93, 175, 93);
+  /* float: left; */
+  display: block;
+  font-size: 1.6rem;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
+
+@media (max-width : 400px) {
+  .pw_check_box{width: 262px;}
+  .pw_check_title {font-size: 0.9rem;}
+  .input_box_design{width: 300px;
+  font-size: 1rem;}
+  #submit_button{font-size: 1.4rem;}
+}

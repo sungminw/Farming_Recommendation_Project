@@ -1,0 +1,115 @@
+package com.farm.myapp.controller;
+
+//import java.text.DateFormat;
+//import java.util.Date;
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.farm.myapp.sales.model.FarmSalesCropAreaVO;
+import com.farm.myapp.sales.model.FarmSalesCropHpriceYieldVO;
+import com.farm.myapp.sales.model.FarmSalesCropProfileVO;
+import com.farm.myapp.sales.model.FarmSalesCropVO;
+import com.farm.myapp.sales.model.FarmSalesInfo;
+import com.farm.myapp.sales.service.IFarmSalesService;
+import com.farm.myapp.sales.model.FarmSalesAreaCropVO;
+
+@Controller
+public class FarmSalesController {
+	@Autowired
+	IFarmSalesService farmSalesService;
+
+	//지역 우선 선택  페이지로 이동(매출분석) 후 재배 가능 농작물 조회
+	@GetMapping(value = "/serviceSales1.do")
+	public ModelAndView cropList(Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		List<FarmSalesCropVO> cropList = farmSalesService.getCropList();
+		modelAndView.addObject("cropList", cropList);
+		modelAndView.setViewName("serviceSales1");
+		return modelAndView;
+	}
+	
+	//선택한 농작물 재배 가능 지역 조회
+	@GetMapping(value = "/cropArea.do")
+	public @ResponseBody List<FarmSalesCropAreaVO> cropArea(@RequestParam("crop")String crop, Model model) {
+		List<FarmSalesCropAreaVO> cropAreaList = farmSalesService.getCropAreaList(crop);
+		return cropAreaList;
+	}
+	
+	//농작물 요약 정보 조회
+	@GetMapping(value="/cropProfile.do")
+	public @ResponseBody List<FarmSalesCropProfileVO> cropProfile(@RequestParam("selectCrop")String selectCrop, Model model) {
+		List<FarmSalesCropProfileVO> cropProfile = farmSalesService.getCropProfile(selectCrop);
+		return cropProfile;
+	}
+	
+	//최근 5년간 농작물 경매 단가 및 생산량 조회
+	@GetMapping(value="/cropHpriceYield.do")
+	public @ResponseBody List<FarmSalesCropHpriceYieldVO> cropHpriceYield(@RequestParam("selectCrop")String selectCrop, Model model) {
+		String selectCrop_matrix = selectCrop;
+		System.out.println("getCropHpriceYield : " + selectCrop_matrix);
+		List<FarmSalesCropHpriceYieldVO> cropHpriceYield = farmSalesService.getCropHpriceYield(selectCrop);
+		System.out.println("cropHpriceYield : " + cropHpriceYield);
+		return cropHpriceYield;
+	}
+
+	
+	//최근 20년간 농작물 매출 조회 및 내년 농작물 매출 예측치 분석
+	@GetMapping(value="/salesCheck.do")
+	public @ResponseBody List<Integer> salesList(@RequestParam("selectCrop")String selectCrop, @RequestParam("selectArea")String selectArea, Model model){
+		List<Integer> salesList = farmSalesService.getSalesList(selectCrop);
+		int salespredict = farmSalesService.getSalespredict(selectCrop, selectArea);
+		salesList.add(salespredict);
+		return salesList;
+	}
+	
+	//지역 우선 선택  페이지로 이동(매출분석)
+	@GetMapping(value="/serviceSales2.do")
+	public String serviceSales2() {
+		return "serviceSales2";
+	}
+	
+	//지역 선택 시 재배 가능한 농작물 리스트 조회
+	@GetMapping(value="/areaCropList.do")
+	public @ResponseBody List<FarmSalesAreaCropVO> areaCropList(@RequestParam("area") String area, Model model){
+		List<FarmSalesAreaCropVO> areaCropList = farmSalesService.getAreaCropList(area);
+		return areaCropList;
+	}
+	
+	//작물, 지역, 예상 매출액 정보를 비용 페이지로 Request
+	@PostMapping(value="/serviceCostGo.do")
+	public String serviceCostGo(@RequestParam("flexRadioDefault")String flexRadioDefault, @RequestParam("areaEng")String areaEng, @RequestParam("salesResult")String salesResult, Model model) {
+		System.out.println("cropEng : " + flexRadioDefault);
+		System.out.println("areaEng : " + areaEng);
+		System.out.println("salesResult : " + salesResult);
+		model.addAttribute("crop", flexRadioDefault);
+		model.addAttribute("area", areaEng);
+		model.addAttribute("salesResult", salesResult);
+		
+		return "serviceCost";
+	}
+//	
+//	@ExceptionHandler({RuntimeException.class})
+//	public ModelAndView runtimeException(HttpServletRequest request, Exception ex) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("url", request.getRequestURI());
+//		mav.addObject("exception", ex);
+//		mav.setViewName("error/runtime");
+//		return mav;
+//	}
+}

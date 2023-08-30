@@ -1,0 +1,5 @@
+package com.farm.myapp.sales.model;
+
+public class FarmSalesPredictVO {
+
+}

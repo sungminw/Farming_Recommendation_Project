@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.farm.myapp.policy.dao.IFarmPolicyRepository">
+	
+	<!-- 정부 지원 정책 확인 페이지로 이동 및 모든 정책 리스트 제공 -->
+	<resultMap type="com.farm.myapp.policy.model.FarmCostPolicyVO" id="policyList">
+		<result property="city" column="city"/>
+		<result property="areaKor" column="area_kor"/>
+		<result property="policyName" column="policy_name"/>
+	</resultMap>
+
+	<!-- 정책 상세 정보 조회 -->
+	<resultMap type="com.farm.myapp.policy.model.FarmCostPolicyInfoVO" id="policyInfo">
+		<result property="policyName" column="policy_name"/>
+		<result property="policyTarget" column="policyTarget"/>
+		<result property="policyCondition" column="policyCondition"/>
+		<result property="policyDocumentation" column="policyDocumentation"/>
+		<result property="policySupport" column="policySupport"/>
+		<result property="policyPhone" column="policyPhone"/>
+	</resultMap>
+	
+	<!-- 정부 지원 정책 확인 페이지로 이동 및 모든 정책 리스트 제공  -->
+	<select id="getServicePolicy" resultMap="policyList">
+		SELECT city, area_kor, policy_name FROM policyList
+	</select>
+
+    <!-- 사용자가 원하는 지역 및 사업명을 포함한 정책 리스트 제공  -->
+    <select id="searchPolicyList" parameterType="String" resultMap="policyList">
+        SELECT city, area_kor, policy_name
+        FROM policyList
+        <where>
+            <if test="sigungu != null and search.equals('')">
+                AND area_eng = #{sigungu}
+            </if>
+            <if test="sigungu.equals('default') and !search.equals('')">
+                AND policy_name LIKE '%' || #{search} || '%'
+            </if>
+            <if test="!sigungu.equals('default') and !search.equals('')">
+                AND area_eng = #{sigungu} AND policy_name LIKE '%' || #{search} || '%'
+            </if>
+        </where>
+    </select>
+    
+    <!-- 정책 상세정보 제공  -->
+	<select id="getPolicyDetail" parameterType="String" resultMap="policyInfo">
+		SELECT policy_name, policyTarget, policyCondition, policydocumentation, policySupport, policyPhone 
+		FROM policyInfos 
+		WHERE area_kor=#{policySigungu} AND policy_name=#{policyTitle}
+	</select>
+    
+</mapper>

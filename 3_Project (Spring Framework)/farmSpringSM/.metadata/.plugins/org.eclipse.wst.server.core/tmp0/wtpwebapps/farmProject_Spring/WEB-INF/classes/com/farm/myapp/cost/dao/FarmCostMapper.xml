@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.farm.myapp.cost.dao.IFarmCostRepository">
+	
+	<!--사용자 조건 별 적용 가능한 정부 지원 정책 리스트 객체 -->
+	<resultMap type="com.farm.myapp.policy.model.FarmCostPolicyVO" id="policyList">
+		<result property="areaKor" column="area_kor"/>
+		<result property="policyName" column="policy_name"/>
+		<result property="cost" column="cost"/>
+	</resultMap>
+	
+	<!-- 정책 상세 정보 조회 -->
+	<resultMap type="com.farm.myapp.policy.model.FarmCostPolicyInfoVO" id="policyInfo">
+		<result property="policyName" column="policy_name"/>
+		<result property="policyTarget" column="policyTarget"/>
+		<result property="policyCondition" column="policyCondition"/>
+		<result property="policyDocumentation" column="policyDocumentation"/>
+		<result property="policySupport" column="policySupport"/>
+		<result property="policyPhone" column="policyPhone"/>
+	</resultMap>
+	
+	<!--사용자 조건 별 적용 가능한 정부 지원 정책 리스트 제공 -->
+	<select id="getPolicyList" parameterType="String" resultMap="policyList">
+		SELECT area_kor , policy_name, cost FROM policyList WHERE age_up&lt;=#{selectAge} AND #{selectAge}&lt;=age_down AND period&gt;=#{selectPeriod} AND area_eng=#{selectArea}
+	</select>
+	
+	<!--농작물과 지역별 연간 소요비용 조회 -->
+	<select id="getOperCost" parameterType="String" resultType="Integer">
+		SELECT total_cost FROM totalCost WHERE crop_eng=#{selectCrop} AND area_eng=#{selectArea}
+	</select>
+	
+	<!--정책 상세 정보 조회 -->
+	<select id="getPolicyInfo" parameterType="String" resultMap="policyInfo">
+		SELECT policy_name, policyTarget, policyCondition, policydocumentation, policySupport, policyPhone 
+		FROM policyInfos 
+		WHERE area_eng=#{selectArea} AND policy_name=#{selectPolicyName}
+	</select>
+	
+</mapper>

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.board_list {
+	width:100%;
+	border-top: 2px solid #595959;
+	border-bottom: red;
+	border-collapse: collapse;
+	text-align: center;
+}
+.board_list td{
+	border-bottom: 2px solid #595959;
+	padding: 10px;
+}
+.board_list th{
+	border-bottom: 2px solid #595959;
+	padding: 10px;
+	background-color: rgb(226, 245, 226);
+}
+
+.input_text,
+.text_area {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input_text {
+	
+	border: 1px solid gray;
+	border-radius: 10px;
+}
+
+.text_area {
+    resize: vertical;
+}
+
+.fx {
+	background-color: rgb(226, 245, 226);
+}
+
+.writeSubmit,
+.modifySubmit,
+.replySubmit {
+    background-color: white;
+    border: none;
+    color: #5B8C51;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.title {
+	text-align: left;
+}
+
+.bottom {
+	text-align: right;
+}
+
+.wider-column {
+	width: 15%;
+	
+}

@@ -1,0 +1,67 @@
+package com.farm.myapp.controller;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.farm.myapp.cost.service.IFarmCostService;
+import com.farm.myapp.policy.model.FarmCostPolicyInfoVO;
+import com.farm.myapp.policy.model.FarmCostPolicyVO;
+
+@Controller
+public class FarmCostContorller {
+	
+	@Autowired
+	IFarmCostService farmCostService;
+	
+	//비용 분석 페이지로 이동
+	@GetMapping(value="/serviceCost.do")
+	public String serviceCost() {
+		return "serviceCost";
+	}
+	
+	//사용자 조건 별 적용 가능한 정부 지원 정책 리스트 검색
+	@GetMapping(value="/policySelect.do")
+	public @ResponseBody List<FarmCostPolicyVO> policyList(@RequestParam("selectCrop")String selectCrop, 
+			@RequestParam("selectArea")String selectArea, 
+			@RequestParam("selectAge")String selectAge, @RequestParam("selectPeriod")String selectPeriod, Model model) {
+		List<FarmCostPolicyVO> PolicyList = farmCostService.getPolicyList(selectCrop, selectArea, selectAge, selectPeriod);
+		return PolicyList;
+	}
+	
+	//농작물과 지역별 연간 소요비용 조회
+	@GetMapping(value="/operCost.do")
+	public @ResponseBody int operCost(@RequestParam("selectCrop")String selectCrop,
+			@RequestParam("selectArea")String selectArea, Model model) {
+		int operCost = farmCostService.getOperCost(selectCrop, selectArea);
+		return operCost;
+	}
+	
+	//정책 상세 정보 조회
+	@GetMapping(value="/policyInfo.do")
+	public @ResponseBody List<FarmCostPolicyInfoVO> policyInfo(@RequestParam("selectArea")String selectArea,
+			@RequestParam("selectPolicyName")String selectPolicyName, Model model) {
+		List<FarmCostPolicyInfoVO>  policyInfo = farmCostService.getPolicyInfo(selectArea, selectPolicyName);
+		return policyInfo;
+	}
+	
+	//농작물, 지역, 매출, 정책비용, 소요비용을 수익 계산 페이지로 Request
+	@PostMapping(value="/serviceProfitGo.do")
+	public String serviceProfitGo(@RequestParam("selectCrop")String selectCrop, 
+			@RequestParam("selectArea")String selectArea, @RequestParam("salesResult")String salesResult,
+			@RequestParam("costPolicy")String costPolicy, @RequestParam("costResult")String costResult, Model model) {
+		model.addAttribute("selectCrop", selectCrop);
+		model.addAttribute("selectArea", selectArea);
+		model.addAttribute("salesResult", salesResult);
+		model.addAttribute("costPolicy", costPolicy);
+		model.addAttribute("costResult", costResult);
+		return "serviceProfit";
+	}
+}
